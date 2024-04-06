@@ -1,4 +1,5 @@
 import { Navbar, NavItem, NavLink } from "reactstrap";
+import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -11,20 +12,22 @@ function App() {
 
 function NavigationBar() {
   return (
-    <Navbar>
-      <NavItem>
-        <NavLink>Home</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink>Volcano List</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink>Register</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink>Login</NavLink>
-      </NavItem>
-    </Navbar>
+    <BrowserRouter>
+      <Navbar className="navbar nav navbar-light bg-light">
+        <NavItem>
+          <NavLink className="navbar-brand">Home</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="navbar-brand">Volcano List</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="navbar-brand">Register</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="navbar-brand">Login</NavLink>
+        </NavItem>
+      </Navbar>
+    </BrowserRouter>
   );
 }
 

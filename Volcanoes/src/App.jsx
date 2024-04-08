@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import VolcanoList from "./pages/VolcanoList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {

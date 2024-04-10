@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 export default function NavBar() {
   return (
     <ul className="navbar bg-dark  list-unstyled">
-      <h1 className="text-light">Volcano Search</h1>
+      <h1>
+        <Link to={"/"} className="text-light text-decoration-none">
+          Volcano Search
+        </Link>
+      </h1>
       <li className="nav-item">
         <Link className="nav-link text-light" to="/">
           Home

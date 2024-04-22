@@ -4,6 +4,7 @@ import VolcanoList from "./pages/VolcanoList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "bootstrap/dist/css/bootstrap.min.css";
+import VolcanoMap from "./pages/VolcanoMap";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="pages/VolcanoList.jsx" element={<VolcanoList />} />
           <Route path="pages/Login.jsx" element={<Login />} />
           <Route path="pages/Register.jsx" element={<Register />} />
+          <Route path="pages/VolcanoMap.jsx" element={<VolcanoMap />} />
         </Routes>
       </div>
     </BrowserRouter>

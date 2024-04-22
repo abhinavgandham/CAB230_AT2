@@ -5,7 +5,7 @@ export default function NavBar() {
     <ul className="navbar bg-dark  list-unstyled">
       <h1>
         <Link to={"/"} className="text-light text-decoration-none">
-          Volcano Search
+          Volcano Sight
         </Link>
       </h1>
       <li className="nav-item">
@@ -25,7 +25,7 @@ export default function NavBar() {
       </li>
       <li className="nav-item">
         <Link className="nav-link text-light" to={"../pages/Register.jsx"}>
-          Registers
+          Register
         </Link>
       </li>
     </ul>

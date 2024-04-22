@@ -4,12 +4,14 @@ import { AgGridReact } from "ag-grid-react";
 import { useState, useEffect } from "react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
+import { useNavigate } from "react-router-dom";
 
 export default function VolcanoList() {
   const [listData, setListData] = useState([]);
   const [country, setCountry] = useState("");
   const [population, setPopulation] = useState("");
   const [rowData, setRowData] = useState([]);
+  const navigate = useNavigate();
 
   // http://4.237.58.241:3000/volcanoes?country=India//
 
@@ -18,6 +20,49 @@ export default function VolcanoList() {
   }
   function findViaPopulation(e) {
     setPopulation(e.target.value);
+  }
+  function countryId(e) {
+    const selectedId = e.node.data.id;
+    let targetLatitude;
+    let targetLongitude;
+    let name;
+    let country;
+    let region;
+    let subRegion;
+    let lastErruption;
+    let summit;
+    let elevation;
+    fetch(`http://4.237.58.241:3000/volcano/${selectedId}`).then((res) => {
+      res
+        .json()
+        .then((data) => {
+          targetLatitude = Number(data.latitude);
+          targetLongitude = Number(data.longitude);
+          name = data.name;
+          country = data.country;
+          region = data.region;
+          subRegion = data.subregion;
+          lastErruption = data.last_eruption;
+          summit = data.summit;
+          elevation = data.elevation;
+        })
+        .then(() => {
+          navigate("../pages/VolcanoMap.jsx", {
+            state: {
+              id: selectedId,
+              targetLatitude: targetLatitude,
+              targetLongitude: targetLongitude,
+              name: name,
+              country: country,
+              region: region,
+              subRegion: subRegion,
+              lastErruption: lastErruption,
+              summit: summit,
+              elevation: elevation,
+            },
+          });
+        });
+    });
   }
 
   const columns = [
@@ -72,6 +117,7 @@ export default function VolcanoList() {
             columnDefs={columns}
             rowData={rowData}
             pagination={true}
+            onCellClicked={countryId}
           />
         }
       </div>
@@ -106,6 +152,7 @@ function CountrySelect({ targetCountry, dataSet, displayData }) {
 function PopulationSelect({ findWithPopulation }) {
   return (
     <select className="form-select" onChange={findWithPopulation}>
+      <option>View options</option>
       <option value={"5km"}>5km</option>
       <option value={"10km"}>10km</option>
       <option value={"30km"}>30km</option>

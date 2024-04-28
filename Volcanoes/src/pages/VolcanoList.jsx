@@ -5,8 +5,12 @@ import { useState, useEffect } from "react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 import { useNavigate } from "react-router-dom";
+import NavBarLoggedIn from "../components/NavBarLoggedIn";
 
-export default function VolcanoList() {
+// eslint-disable-next-line react/prop-types
+export default function VolcanoList({ isLoggedIn, token }) {
+  console.log("VolcanoList", isLoggedIn);
+  console.log(token);
   const [listData, setListData] = useState([]);
   const [country, setCountry] = useState("");
   const [population, setPopulation] = useState("");
@@ -32,37 +36,88 @@ export default function VolcanoList() {
     let lastErruption;
     let summit;
     let elevation;
-    fetch(`http://4.237.58.241:3000/volcano/${selectedId}`).then((res) => {
-      res
-        .json()
-        .then((data) => {
-          targetLatitude = Number(data.latitude);
-          targetLongitude = Number(data.longitude);
-          name = data.name;
-          country = data.country;
-          region = data.region;
-          subRegion = data.subregion;
-          lastErruption = data.last_eruption;
-          summit = data.summit;
-          elevation = data.elevation;
-        })
-        .then(() => {
-          navigate("../pages/VolcanoMap.jsx", {
-            state: {
-              id: selectedId,
-              targetLatitude: targetLatitude,
-              targetLongitude: targetLongitude,
-              name: name,
-              country: country,
-              region: region,
-              subRegion: subRegion,
-              lastErruption: lastErruption,
-              summit: summit,
-              elevation: elevation,
-            },
+    let populations;
+    if (isLoggedIn) {
+      return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((res) => {
+        res
+          .json()
+          .then((data) => {
+            targetLatitude = Number(data.latitude);
+            targetLongitude = Number(data.longitude);
+            name = data.name;
+            country = data.country;
+            region = data.region;
+            subRegion = data.subregion;
+            lastErruption = data.last_eruption;
+            summit = data.summit;
+            elevation = data.elevation;
+            populations = [
+              data.population_5km,
+              data.population_10km,
+              data.population_30km,
+              data.population_100km,
+            ];
+            console.log(populations);
+          })
+          .then(() => {
+            navigate("../pages/VolcanoMap.jsx", {
+              state: {
+                id: selectedId,
+                targetLatitude: targetLatitude,
+                targetLongitude: targetLongitude,
+                name: name,
+                country: country,
+                region: region,
+                subRegion: subRegion,
+                lastErruption: lastErruption,
+                summit: summit,
+                elevation: elevation,
+                populations: populations,
+              },
+            });
           });
-        });
-    });
+      });
+    } else {
+      return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`).then(
+        (res) => {
+          res
+            .json()
+            .then((data) => {
+              targetLatitude = Number(data.latitude);
+              targetLongitude = Number(data.longitude);
+              name = data.name;
+              country = data.country;
+              region = data.region;
+              subRegion = data.subregion;
+              lastErruption = data.last_eruption;
+              summit = data.summit;
+              elevation = data.elevation;
+            })
+            .then(() => {
+              navigate("../pages/VolcanoMap.jsx", {
+                state: {
+                  id: selectedId,
+                  targetLatitude: targetLatitude,
+                  targetLongitude: targetLongitude,
+                  name: name,
+                  country: country,
+                  region: region,
+                  subRegion: subRegion,
+                  lastErruption: lastErruption,
+                  summit: summit,
+                  elevation: elevation,
+                },
+              });
+            });
+        }
+      );
+    }
   }
 
   const columns = [
@@ -98,9 +153,9 @@ export default function VolcanoList() {
 
   return (
     <div>
-      <NavBar />
+      {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
       <div
-        className="ag-theme-balham justify-content-center"
+        className="ag-theme-balham justify-content-center mx-auto"
         style={{
           height: "300px",
           width: "600px",
@@ -120,6 +175,17 @@ export default function VolcanoList() {
             onCellClicked={countryId}
           />
         }
+        <label htmlFor="Search Country" className="form-label mt-5 fs-4">
+          Search Country
+        </label>
+        <div className="col-md-6">
+          <input
+            type="text"
+            className="form-control input-sm"
+            value={country}
+            onChange={displaySelectedData}
+          ></input>
+        </div>
       </div>
       <Footer />
     </div>
@@ -135,7 +201,7 @@ function CountrySelect({ targetCountry, dataSet, displayData }) {
       value={targetCountry}
       onChange={displayData}
     >
-      <option>Open this select menu</option>
+      <option>Country</option>
       {/* eslint-disable-next-line react/prop-types  */}
       {dataSet.map((country) => {
         return (
@@ -152,7 +218,7 @@ function CountrySelect({ targetCountry, dataSet, displayData }) {
 function PopulationSelect({ findWithPopulation }) {
   return (
     <select className="form-select" onChange={findWithPopulation}>
-      <option>View options</option>
+      <option>Populated Within</option>
       <option value={"5km"}>5km</option>
       <option value={"10km"}>10km</option>
       <option value={"30km"}>30km</option>

@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function NavBar() {
+export default function NavBarLoggedIn() {
+  const navigate = useNavigate();
+  function logout() {
+    localStorage.clear();
+    navigate("../pages/Login.jsx");
+  }
   return (
     <ul className="navbar bg-dark  list-unstyled">
       <h1>
@@ -19,13 +25,8 @@ export default function NavBar() {
         </Link>
       </li>
       <li className="nav-item mx-auto">
-        <Link className="nav-link text-light" to={"../pages/Login.jsx"}>
-          Login
-        </Link>
-      </li>
-      <li className="nav-item mx-auto">
-        <Link className="nav-link text-light " to={"../pages/Register.jsx"}>
-          Register
+        <Link className="nav-link text-light" to={"/"} onClick={logout}>
+          Logout
         </Link>
       </li>
     </ul>

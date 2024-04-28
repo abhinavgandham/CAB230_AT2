@@ -5,17 +5,35 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "bootstrap/dist/css/bootstrap.min.css";
 import VolcanoMap from "./pages/VolcanoMap";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(null);
+  console.log(isLoggedIn);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setToken(token);
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
     <BrowserRouter>
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="pages/VolcanoList.jsx" element={<VolcanoList />} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+          <Route
+            path="pages/VolcanoList.jsx"
+            element={<VolcanoList isLoggedIn={isLoggedIn} token={token} />}
+          />
           <Route path="pages/Login.jsx" element={<Login />} />
           <Route path="pages/Register.jsx" element={<Register />} />
-          <Route path="pages/VolcanoMap.jsx" element={<VolcanoMap />} />
+          <Route
+            path="pages/VolcanoMap.jsx"
+            element={<VolcanoMap isLoggedIn={isLoggedIn} />}
+          />
         </Routes>
       </div>
     </BrowserRouter>

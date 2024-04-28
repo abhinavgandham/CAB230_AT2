@@ -4,8 +4,12 @@ import { useNavigate } from "react-router-dom";
 export default function NavBarLoggedIn() {
   const navigate = useNavigate();
   function logout() {
-    localStorage.clear();
     navigate("../pages/Login.jsx");
+    localStorage.clear();
+    const refresh = setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+    return () => clearTimeout(refresh);
   }
   return (
     <ul className="navbar bg-dark  list-unstyled">

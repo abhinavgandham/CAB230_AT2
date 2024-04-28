@@ -15,20 +15,27 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log(token);
     setToken(token);
-    setIsLoggedIn(!!token);
+    setIsLoggedIn(token);
   }, []);
 
   return (
     <BrowserRouter>
       <div>
         <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+          <Route
+            path="/"
+            element={<Home isLoggedIn={isLoggedIn} token={token} />}
+          />
           <Route
             path="pages/VolcanoList.jsx"
             element={<VolcanoList isLoggedIn={isLoggedIn} token={token} />}
           />
-          <Route path="pages/Login.jsx" element={<Login />} />
+          <Route
+            path="pages/Login.jsx"
+            element={<Login isLoggedIn={isLoggedIn} />}
+          />
           <Route path="pages/Register.jsx" element={<Register />} />
           <Route
             path="pages/VolcanoMap.jsx"

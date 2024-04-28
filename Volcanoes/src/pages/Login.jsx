@@ -27,21 +27,24 @@ export default function Login() {
         password: password,
       }),
     })
-      .then((res) => res.json())
       .then((res) => {
         if (!res.ok) {
-          console.log(res);
           setInCorrect("Incorrect email or password");
-          return;
-        } else {
-          console.log(res);
-          console.log(res.token);
-          localStorage.setItem("token", res.token);
-          console.log("navigating");
-          navigate("/");
+          throw new Error("Incorrect email or password");
         }
+        return res.json();
       })
-      .catch((e) => console.log(e));
+      .then((data) => {
+        console.log(data);
+        console.log(data.token);
+        const token = data.token;
+        localStorage.setItem("token", token);
+        navigate("/");
+        const refresh = setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        return () => clearTimeout(refresh);
+      });
   }
   function validateEmail(e) {
     const { value } = e.target;

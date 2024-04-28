@@ -8,23 +8,39 @@ export default function NavBar() {
           Volcano Sight
         </Link>
       </h1>
-      <li className="nav-item mx-auto">
-        <Link className="nav-link text-light" to="/">
+      <li className="nav-item ">
+        <Link
+          className="nav-link text-light"
+          style={{ marginLeft: "5px" }}
+          to="/"
+        >
           Home
         </Link>
       </li>
-      <li className="nav-item mx-auto">
-        <Link className="nav-link text-light" to={"../pages/VolcanoList.jsx"}>
+      <li className="nav-item " style={{ marginLeft: "-10px" }}>
+        <Link
+          className="nav-link text-light"
+          style={{ marginLeft: "10px" }}
+          to={"../pages/VolcanoList.jsx"}
+        >
           Volcano List
         </Link>
       </li>
-      <li className="nav-item mx-auto">
-        <Link className="nav-link text-light" to={"../pages/Login.jsx"}>
+      <li className="nav-item " style={{ marginLeft: "-10px" }}>
+        <Link
+          className="nav-link text-light"
+          style={{ marginLeft: "-10px" }}
+          to={"../pages/Login.jsx"}
+        >
           Login
         </Link>
       </li>
-      <li className="nav-item mx-auto">
-        <Link className="nav-link text-light " to={"../pages/Register.jsx"}>
+      <li className="nav-item">
+        <Link
+          className="nav-link text-light "
+          style={{ marginRight: "5px" }}
+          to={"../pages/Register.jsx"}
+        >
           Register
         </Link>
       </li>

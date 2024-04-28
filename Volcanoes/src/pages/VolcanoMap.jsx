@@ -1,6 +1,7 @@
 import { Map, Marker } from "pigeon-maps";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
 import NavBar from "../components/NavBar";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 
@@ -61,7 +62,7 @@ export default function VolcanoMap({ isLoggedIn }) {
         <h2 className="text-center mb-3">
           <strong>Longitude:</strong> {longitude}
         </h2>
-        {isLoggedIn ? <h1>Chart</h1> : null}
+        <div>s</div>
       </div>
     </div>
   );

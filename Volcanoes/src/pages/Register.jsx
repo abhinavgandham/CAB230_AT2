@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const API_URL = "http://4.237.58.241:3000";
 export default function Register() {
@@ -12,6 +13,7 @@ export default function Register() {
   const [lastNameError, setLastNameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const [accountCreation, setAccountCreation] = useState(false);
 
   function register() {
     const endPoint = `${API_URL}/user/register`;
@@ -26,21 +28,19 @@ export default function Register() {
         password: password,
       }),
     })
-      .then((res) =>
-        res.json().then((res) => {
-          if (res.ok) {
-            window.alert(res.message);
-            console.log(res);
-            setFirstName("");
-            setLastName("");
-            setEmail("");
-            setPassword("");
-          } else {
-            window.alert(res.message);
-            throw new Error(`${res.message}`);
-          }
-        })
-      )
+      .then((res) => {
+        if (res.status === 400) {
+          setAccountCreation(false);
+          throw new Error("Both email and password are required");
+        }
+        if (res.status === 409) {
+          setAccountCreation(false);
+          throw new Error("User already exists");
+        }
+        if (res.ok) {
+          setAccountCreation(true);
+        }
+      })
       .catch((e) => console.log(e));
   }
 
@@ -136,6 +136,15 @@ export default function Register() {
         >
           Register
         </button>
+        {accountCreation ? (
+          <h1 className="fn-2">
+            Account created successfully, click{" "}
+            <Link to={"../pages/Login.jsx"}>here</Link>
+            to login
+          </h1>
+        ) : (
+          <h1>{accountCreation}</h1>
+        )}
       </div>
       <Footer />
     </div>

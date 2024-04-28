@@ -42,7 +42,7 @@ export default function Login() {
         navigate("/");
         const refresh = setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 200);
         return () => clearTimeout(refresh);
       });
   }

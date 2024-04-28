@@ -62,7 +62,7 @@ export default function VolcanoMap({ isLoggedIn }) {
         <h2 className="text-center mb-3">
           <strong>Longitude:</strong> {longitude}
         </h2>
-        <div>s</div>
+        {isLoggedIn ? <h1>Chart</h1> : null}
       </div>
     </div>
   );

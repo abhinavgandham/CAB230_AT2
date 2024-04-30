@@ -8,7 +8,7 @@ export default function NavBarLoggedIn() {
     localStorage.clear();
     const refresh = setTimeout(() => {
       window.location.reload();
-    }, 500);
+    }, 100);
     return () => clearTimeout(refresh);
   }
   return (

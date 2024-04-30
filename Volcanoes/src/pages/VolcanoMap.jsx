@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import NavBar from "../components/NavBar";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
+import { Bar } from "react-chartjs-2";
 
 // eslint-disable-next-line react/prop-types
 export default function VolcanoMap({ isLoggedIn }) {
@@ -23,7 +24,6 @@ export default function VolcanoMap({ isLoggedIn }) {
   const elevation = location.state.elevation;
   const populations = location.state.populations;
   const center = [latitude, longitude];
-  console.log(populations);
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
@@ -62,8 +62,39 @@ export default function VolcanoMap({ isLoggedIn }) {
         <h2 className="text-center mb-3">
           <strong>Longitude:</strong> {longitude}
         </h2>
-        {isLoggedIn ? <h1>Chart</h1> : null}
+        {isLoggedIn ? (
+          <div>
+            <h1>Population Density</h1>
+            <ChartContainer populationData={populations} />
+          </div>
+        ) : null}
       </div>
     </div>
   );
+}
+
+function Chart({ data }) {
+  return (
+    <div>
+      <Bar data={data} />
+    </div>
+  );
+}
+
+// eslint-disable-next-line react/prop-types
+function ChartContainer({ populationData }) {
+  const data = {
+    labels: ["5km", "10km", "30km", "100km"],
+    datasets: [
+      {
+        label: "Population Density",
+        data: populationData,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  return <Chart data={data} />;
 }

@@ -1,10 +1,18 @@
 import { Map, Marker } from "pigeon-maps";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 import NavBar from "../components/NavBar";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
-import { Bar } from "react-chartjs-2";
+import Chart from "chart.js/auto";
+import {
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js/auto";
 
 // eslint-disable-next-line react/prop-types
 export default function VolcanoMap({ isLoggedIn }) {
@@ -73,12 +81,30 @@ export default function VolcanoMap({ isLoggedIn }) {
   );
 }
 
-function Chart({ data }) {
-  return (
-    <div>
-      <Bar data={data} />
-    </div>
-  );
+// eslint-disable-next-line react/prop-types
+function BarChart({ data }) {
+  const chartRef = useRef(null);
+  const instanceOfChart = useRef(null);
+
+  useEffect(() => {
+    if (instanceOfChart.current !== null) {
+      instanceOfChart.current.destroy();
+    }
+
+    if (chartRef.current && data) {
+      instanceOfChart.current = new Chart(chartRef.current, {
+        type: "bar",
+        data: data,
+      });
+    }
+    return () => {
+      if (instanceOfChart.current !== null) {
+        instanceOfChart.current.destroy();
+      }
+    };
+  }, [data]);
+
+  return <canvas ref={chartRef} />;
 }
 
 // eslint-disable-next-line react/prop-types
@@ -96,5 +122,5 @@ function ChartContainer({ populationData }) {
     ],
   };
 
-  return <Chart data={data} />;
+  return <BarChart data={data} />;
 }

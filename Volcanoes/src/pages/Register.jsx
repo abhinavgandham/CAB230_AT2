@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
 
 export const API_URL = "http://4.237.58.241:3000";
 export default function Register() {
@@ -13,6 +13,9 @@ export default function Register() {
   const [lastNameError, setLastNameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const [accountAlreadyRegistered, setAccountAlreadyRegistered] =
+    useState(false);
+  const [accountRegisterError, setAccountRegisterError] = useState(false);
   const [accountCreation, setAccountCreation] = useState(false);
 
   function register() {
@@ -30,11 +33,11 @@ export default function Register() {
     })
       .then((res) => {
         if (res.status === 400) {
-          setAccountCreation(false);
+          setAccountRegisterError(true);
           throw new Error("Both email and password are required");
         }
         if (res.status === 409) {
-          setAccountCreation(false);
+          setAccountAlreadyRegistered(true);
           throw new Error("User already exists");
         }
         if (res.ok) {
@@ -136,17 +139,29 @@ export default function Register() {
         >
           Register
         </button>
-        {accountCreation ? (
-          <h1 className="fn-2">
-            Account created successfully, click{" "}
-            <Link to={"../pages/Login.jsx"}>here</Link>
-            to login
-          </h1>
-        ) : (
-          <h1>{accountCreation}</h1>
-        )}
       </div>
+      {accountRegisterError ? (
+        <Message message={"Both email and password are required"} />
+      ) : accountAlreadyRegistered ? (
+        <Message message={"Account already exists"} />
+      ) : accountCreation ? (
+        <Message message={"Account has been successfully created!"} />
+      ) : null}
       <Footer />
     </div>
   );
+}
+
+// eslint-disable-next-line react/prop-types
+function Message({ message }) {
+  const [messageVisible, setMessageVisible] = useState(false);
+
+  useEffect(() => {
+    setMessageVisible(true);
+    const displayTimer = setTimeout(() => {
+      setMessageVisible(false);
+    }, 5000);
+    return () => clearTimeout(displayTimer);
+  }, [message]);
+  return messageVisible ? <h2 className="text-center">{message}</h2> : null;
 }

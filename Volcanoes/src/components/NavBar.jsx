@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
-    <ul className="navbar bg-dark  list-unstyled">
+    <ul className="navbar bg-dark list-unstyled d-flex justify-content-between align-items-center">
       <h1>
         <Link to={"/"} className="text-light text-decoration-none">
           Volcano Sight

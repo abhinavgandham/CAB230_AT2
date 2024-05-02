@@ -2,6 +2,7 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const API_URL = "http://4.237.58.241:3000";
@@ -39,6 +40,7 @@ export default function Login() {
         console.log(data.token);
         const token = data.token;
         localStorage.setItem("token", token);
+
         navigate("/");
         const refresh = setTimeout(() => {
           window.location.reload();
@@ -101,12 +103,25 @@ export default function Login() {
         Don't have an account?{" "}
         <Link to={"../pages/Register.jsx"}>Register</Link>
       </p>
-      {!inCorrect ? (
-        <p className="text-center mt-5 text-danger display-4">{inCorrect}</p>
+      {inCorrect ? (
+        <Message message={"Incorrect email or password"} />
+      ) : passwordError ? (
+        <Message message={"There was an error"} />
       ) : null}
       <Footer />
     </div>
   );
 }
 
-// eslint-disable-next-line react/prop-types
+function Message({ message }) {
+  const [messageVisible, setMessageVisible] = useState(false);
+
+  useEffect(() => {
+    setMessageVisible(true);
+    const displayTimer = setTimeout(() => {
+      setMessageVisible(false);
+    }, 5000);
+    return () => clearTimeout(displayTimer);
+  }, [message]);
+  return messageVisible ? <h2 className="text-center">{message}</h2> : null;
+}

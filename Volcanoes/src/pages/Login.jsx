@@ -74,6 +74,7 @@ export default function Login() {
     }
     setPassword(value);
   }
+
   return (
     <div>
       <NavBar />
@@ -113,6 +114,7 @@ export default function Login() {
   );
 }
 
+// eslint-disable-next-line react/prop-types
 function Message({ message }) {
   const [messageVisible, setMessageVisible] = useState(false);
 

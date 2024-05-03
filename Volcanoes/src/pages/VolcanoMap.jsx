@@ -7,12 +7,6 @@ import { useRef } from "react";
 import NavBar from "../components/NavBar";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 import Chart from "chart.js/auto";
-import {
-  BarController,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from "chart.js/auto";
 
 // eslint-disable-next-line react/prop-types
 export default function VolcanoMap({ isLoggedIn }) {
@@ -40,39 +34,72 @@ export default function VolcanoMap({ isLoggedIn }) {
         Back
       </button>
       <div className="row justify-content-center mt-4">
-        <section className="col-md-10 mb-4 text-center">
+        <section className="col-md-8 mb-4  text-center">
           <Map center={center} height={500} width={1100}>
             <Marker anchor={center} />
           </Map>
         </section>
-        <h2 className="text-center mb-3">
-          <strong>Country:</strong> {country}
-        </h2>
-        <h2 className="text-center mb-3">
-          <strong>Region:</strong> {region}
-        </h2>
-        <div></div>
-        <h2 className="text-center mb-3">
-          <strong>Sub Region:</strong> {subRegion}
-        </h2>
-        <h2 className="text-center mb-3">
-          <strong>Last Eruption:</strong> {lastErruption}
-        </h2>
-        <h2 className="text-center mb-3">
-          <strong>Summit:</strong> {summit}
-        </h2>
-        <h2 className="text-center mb-3">
-          <strong>Elevation:</strong> {elevation}
-        </h2>
-        <h2 className="text-center mb-3">
-          <strong>Latitude:</strong> {latitude}
-        </h2>
-        <h2 className="text-center mb-3">
-          <strong>Longitude:</strong> {longitude}
-        </h2>
+        {isLoggedIn ? (
+          <div className="col-sm-1">
+            <p className="fs-6">
+              <strong>Country:</strong> {country}
+            </p>
+            <p className="fs-6">
+              <strong>Region:</strong> {region}
+            </p>
+            <div></div>
+            <p className="fs-6">
+              <strong>Sub Region:</strong> {subRegion}
+            </p>
+            <p className="fs-6">
+              <strong>Last Eruption:</strong> {lastErruption}
+            </p>
+            <p className="fs-6">
+              <strong>Summit:</strong> {summit}
+            </p>
+            <p className="fs-6">
+              <strong>Elevation:</strong> {elevation}
+            </p>
+            <p className="fs-6">
+              <strong>Latitude:</strong> {latitude}
+            </p>
+            <p className="fs-6">
+              <strong>Longitude:</strong> {longitude}
+            </p>
+          </div>
+        ) : (
+          <div className="col-md-11">
+            <h2 className="text-center mb-3">
+              <strong>Country:</strong> {country}
+            </h2>
+            <h2 className="text-center mb-3">
+              <strong>Region:</strong> {region}
+            </h2>
+            <div></div>
+            <h2 className="text-center mb-3">
+              <strong>Sub Region:</strong> {subRegion}
+            </h2>
+            <h2 className="text-center mb-3">
+              <strong>Last Eruption:</strong> {lastErruption}
+            </h2>
+            <h2 className="text-center mb-3">
+              <strong>Summit:</strong> {summit}
+            </h2>
+            <h2 className="text-center mb-3">
+              <strong>Elevation:</strong> {elevation}
+            </h2>
+            <h2 className="text-center mb-3">
+              <strong>Latitude:</strong> {latitude}
+            </h2>
+            <h2 className="text-center mb-3">
+              <strong>Longitude:</strong> {longitude}
+            </h2>
+          </div>
+        )}
+
         {isLoggedIn ? (
           <div>
-            <h1>Population Density</h1>
+            <h1 className="text-center mt-5">Population Density</h1>
             <ChartContainer populationData={populations} />
           </div>
         ) : null}
@@ -93,7 +120,7 @@ function BarChart({ data }) {
 
     if (chartRef.current && data) {
       instanceOfChart.current = new Chart(chartRef.current, {
-        type: "bar",
+        type: "line",
         data: data,
       });
     }
@@ -104,7 +131,7 @@ function BarChart({ data }) {
     };
   }, [data]);
 
-  return <canvas ref={chartRef} />;
+  return <canvas ref={chartRef} style={{ width: "20px", height: "50px" }} />;
 }
 
 // eslint-disable-next-line react/prop-types
@@ -115,12 +142,16 @@ function ChartContainer({ populationData }) {
       {
         label: "Population Density",
         data: populationData,
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)",
-        borderWidth: 1,
+        backgroundColor: "red",
+        borderColor: "black",
+        borderWidth: 2,
       },
     ],
   };
 
-  return <BarChart data={data} />;
+  return (
+    <div className="chart-container">
+      <BarChart data={data} />
+    </div>
+  );
 }

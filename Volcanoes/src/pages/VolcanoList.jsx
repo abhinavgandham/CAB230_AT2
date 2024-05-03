@@ -63,7 +63,6 @@ export default function VolcanoList({ isLoggedIn, token }) {
               data.population_30km,
               data.population_100km,
             ];
-            console.log(populations);
           })
           .then(() => {
             navigate("../pages/VolcanoMap.jsx", {

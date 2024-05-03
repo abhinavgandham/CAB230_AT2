@@ -120,7 +120,7 @@ function BarChart({ data }) {
 
     if (chartRef.current && data) {
       instanceOfChart.current = new Chart(chartRef.current, {
-        type: "line",
+        type: "bar",
         data: data,
       });
     }

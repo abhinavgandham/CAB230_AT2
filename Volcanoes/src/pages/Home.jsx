@@ -14,9 +14,8 @@ export default function Home({ isLoggedIn }) {
         </h1>
         <img
           src="../../src/images/volcano1.jpeg"
-          className="img-fluid"
+          className="img-fluid w-100"
           alt="Image of volcano"
-          width={2000}
         />
         <div className="text-center mt-5">
           {!isLoggedIn ? (

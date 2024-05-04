@@ -152,7 +152,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
       <div
-        className="ag-theme-balham justify-content-center mx-auto"
+        className="ag-theme-balham-dark justify-content-center mx-auto"
         style={{
           height: "300px",
           width: "600px",
@@ -172,17 +172,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
             onCellClicked={countryId}
           />
         }
-        <label htmlFor="Search Country" className="form-label mt-5 fs-4">
-          Search Country
-        </label>
-        <div className="col-md-6">
-          <input
-            type="text"
-            className="form-control input-sm"
-            value={country}
-            onChange={displaySelectedData}
-          ></input>
-        </div>
+        <CountrySearch country={country} selectionData={displaySelectedData} />
       </div>
       <Footer />
     </div>
@@ -192,7 +182,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
 function CountrySelect({ targetCountry, dataSet, displayData }) {
   return (
     <select
-      className="form-select"
+      className="form-select mb-2"
       aria-label="select country"
       value={targetCountry}
       onChange={displayData}
@@ -211,12 +201,32 @@ function CountrySelect({ targetCountry, dataSet, displayData }) {
 
 function PopulationSelect({ findWithPopulation }) {
   return (
-    <select className="form-select" onChange={findWithPopulation}>
+    <select className="form-select mb-2" onChange={findWithPopulation}>
       <option>Populated Within</option>
       <option value={"5km"}>5km</option>
       <option value={"10km"}>10km</option>
       <option value={"30km"}>30km</option>
       <option value={"100km"}>100km</option>
     </select>
+  );
+}
+
+function CountrySearch({ country, selectionData }) {
+  return (
+    <div className="container mt-5">
+      <div className="border border-danger border-2 rounded shadow p-3">
+        <label htmlFor="Search Country" className="form-label fs-4 text-dark">
+          Search Country
+        </label>
+        <div className="col-md-6">
+          <input
+            type="text"
+            className="form-control input-sm"
+            value={country}
+            onChange={selectionData}
+          ></input>
+        </div>
+      </div>
+    </div>
   );
 }

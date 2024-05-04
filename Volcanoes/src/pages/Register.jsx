@@ -100,46 +100,53 @@ export default function Register() {
   return (
     <div>
       <NavBar />
-      <h1 className="text-center mt-5">Register</h1>
-      <div className="form-group d-flex flex-column align-items-center">
-        <label className="mt-3">Firstname</label>
-        <input
-          type="text"
-          className="form-control-lg w-25 flex-row "
-          value={firstName}
-          onChange={validateFirstName}
-        />
-        {firstNameError != null ? <p>Error: {firstNameError}</p> : null}
-        <label className="mt-3">Lastname</label>
-        <input
-          type="text"
-          className="form-control-lg w-25 flex-row "
-          value={lastName}
-          onChange={validateLastName}
-        />
-        {lastNameError != null ? <p>Error: {lastNameError}</p> : null}
-        <label className="mt-3">Email</label>
-        <input
-          type="email"
-          className="form-control-lg w-25 flex-row "
-          value={email}
-          onChange={validateEmail}
-        />
-        {emailError != null ? <p>Error: {emailError}</p> : null}
-        <label className="mt-3">Password</label>
-        <input
-          type="password"
-          className="form-control-lg w-25 "
-          onChange={validatePassword}
-        />
-        {passwordError != null ? <p>Error: {passwordError}</p> : null}
-        <button
-          type="submit"
-          className="btn btn-danger mt-5"
-          onClick={register}
-        >
-          Register
-        </button>
+      <div
+        className="container mt-5"
+        style={{ maxWidth: "800px", margin: "auto" }}
+      >
+        <div className="border border-danger border-5 rounded shadow p-4">
+          <h1 className="text-center">Register</h1>
+          <div className="form-group d-flex flex-column align-items-center">
+            <label className="mt-3">Firstname</label>
+            <input
+              type="text"
+              className="form-control-lg w-30 flex-row "
+              value={firstName}
+              onChange={validateFirstName}
+            />
+            {firstNameError != null ? <p>Error: {firstNameError}</p> : null}
+            <label className="mt-3">Lastname</label>
+            <input
+              type="text"
+              className="form-control-lg w-30 flex-row "
+              value={lastName}
+              onChange={validateLastName}
+            />
+            {lastNameError != null ? <p>Error: {lastNameError}</p> : null}
+            <label className="mt-3">Email</label>
+            <input
+              type="email"
+              className="form-control-lg w-30 flex-row "
+              value={email}
+              onChange={validateEmail}
+            />
+            {emailError != null ? <p>Error: {emailError}</p> : null}
+            <label className="mt-3">Password</label>
+            <input
+              type="password"
+              className="form-control-lg w-30 "
+              onChange={validatePassword}
+            />
+            {passwordError != null ? <p>Error: {passwordError}</p> : null}
+            <button
+              type="submit"
+              className="btn btn-danger mt-4"
+              onClick={register}
+            >
+              Register
+            </button>
+          </div>
+        </div>
       </div>
       {accountRegisterError ? (
         <Message message={"Both email and password are required"} />

@@ -79,38 +79,49 @@ export default function Login() {
   return (
     <div>
       <NavBar />
-      <h1 className="text-center mt-5">Login</h1>
-      <div className="form-group d-flex flex-column align-items-center">
-        <label className="mt-5">Email</label>
-        <input
-          type="email"
-          className="form-control-lg w-25 flex-row mt-2"
-          value={email}
-          onChange={validateEmail}
-        />
-        {emailError != null ? <p>Error: {emailError}</p> : null}
-        <label className="mt-5">Password</label>
-        <input
-          type="password"
-          className="form-control-lg w-25 flex-row mt-2"
-          value={password}
-          onChange={validatePassword}
-        />
-        {passwordError != null ? <p>Error: {passwordError}</p> : null}
-        <button type="submit" className="btn btn-danger mt-5" onClick={login}>
-          Login
-        </button>
+      <div
+        className="container mt-5"
+        style={{ maxWidth: "800px", margin: "auto" }}
+      >
+        <div className="border border-danger border-5 rounded shadow p-4">
+          <h1 className="text-center">Login</h1>
+          <div className="form-group d-flex flex-column align-items-center">
+            <label className="mt-5">Email</label>
+            <input
+              type="email"
+              className="form-control-lg w-30 mt-2"
+              value={email}
+              onChange={validateEmail}
+            />
+            {emailError != null ? <p>Error: {emailError}</p> : null}
+            <label className="mt-5">Password</label>
+            <input
+              type="password"
+              className="form-control-lg w-30 mt-2"
+              value={password}
+              onChange={validatePassword}
+            />
+            {passwordError != null ? <p>Error: {passwordError}</p> : null}
+            <button
+              type="submit"
+              className="btn btn-danger mt-5"
+              onClick={login}
+            >
+              Login
+            </button>
+          </div>
+          <p className="text-center mt-5">
+            Don't have an account?{" "}
+            <Link to={"../pages/Register.jsx"}>Register</Link>
+          </p>
+        </div>
+        {inCorrect ? (
+          <Message message={"Incorrect email or password"} />
+        ) : passwordError ? (
+          <Message message={"There was an error"} />
+        ) : null}
+        <Footer />
       </div>
-      <p className="text-center mt-5">
-        Don't have an account?{" "}
-        <Link to={"../pages/Register.jsx"}>Register</Link>
-      </p>
-      {inCorrect ? (
-        <Message message={"Incorrect email or password"} />
-      ) : passwordError ? (
-        <Message message={"There was an error"} />
-      ) : null}
-      <Footer />
     </div>
   );
 }

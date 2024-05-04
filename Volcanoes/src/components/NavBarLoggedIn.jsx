@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import logo2 from "../images/logo2.jpeg";
+import logo from "../images/logo.jpeg";
 
 export default function NavBarLoggedIn() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function NavBarLoggedIn() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link to={"/"} className="navbar-brand">
-          <img src={logo2} width={50}></img>
+          <img src={logo} width={50}></img>
           Volcano Sight
         </Link>
         <button className="navbar-toggler" type="button" onClick={toggleNavBar}>
@@ -33,12 +33,12 @@ export default function NavBarLoggedIn() {
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
+            <li className="nav-item p-2">
               <Link className="nav-link text-light" to="/">
                 Home
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item p-2">
               <Link
                 className="nav-link text-light"
                 to="../pages/VolcanoList.jsx"
@@ -46,7 +46,7 @@ export default function NavBarLoggedIn() {
                 Volcano List
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item p-2">
               <Link
                 className="nav-link text-light"
                 onClick={logout}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import logo2 from "../images/logo2.jpeg";
+import logo from "../images/logo.jpeg";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function NavBar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link to={"/"} className="navbar-brand">
-          <img src={logo2} width={50}></img>
+          <img src={logo} width={50}></img>
           Volcano Sight
         </Link>
         <button className="navbar-toggler" type="button" onClick={toggleNavBar}>
@@ -24,12 +24,12 @@ export default function NavBar() {
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
+            <li className="nav-item p-2">
               <Link className="nav-link text-light" to="/">
                 Home
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item p-2">
               <Link
                 className="nav-link text-light"
                 to="../pages/VolcanoList.jsx"
@@ -37,12 +37,12 @@ export default function NavBar() {
                 Volcano List
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item p-2">
               <Link className="nav-link text-light" to="../pages/Login.jsx">
                 Login
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item p-2">
               <Link className="nav-link text-light" to="../pages/Register.jsx">
                 Register
               </Link>

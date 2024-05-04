@@ -9,23 +9,43 @@ export default function Home({ isLoggedIn }) {
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
       <section className="container-fluid">
-        <h1 className="display-5 bg-light fw-bold text-center">
+        <h1 className="display-5 mt-2 bg-light fw-bold text-center">
           Welcome to Volcano Sight
         </h1>
-        <img
-          src="../../src/images/volcano1.jpeg"
-          className="img-fluid w-100"
-          alt="Image of volcano"
-        />
-        <div className="text-center mt-5">
-          {!isLoggedIn ? (
-            <Link to={"../pages/Login.jsx"} className="mx-2">
-              <button className="btn btn-danger fs-4">Sign In</button>
-            </Link>
-          ) : null}
-          <Link to={"../pages/VolcanoList.jsx"} className="mx-2">
-            <button className="btn btn-danger fs-4">Start exploring</button>
-          </Link>
+        <div className="row mt-5">
+          <div className="col-md-6">
+            <img
+              src="../../src/images/volcano.jpeg"
+              className="img-fluid w-80 mt-5"
+              alt="Image of volcano"
+            />
+          </div>
+          <div
+            className="
+          border border-danger border-5 rounded shadow bg-dark text-light
+          col-md-5 mt-5 flex-row justify-content-center 
+          align-items-center"
+          >
+            {!isLoggedIn ? (
+              <h2 className="text-center mt-5">
+                Click
+                <Link to={"../pages/Login.jsx"} className="mx-2 text-danger">
+                  here
+                </Link>
+                to login
+              </h2>
+            ) : null}
+            <h2 className="text-center mt-5">
+              Click
+              <Link
+                to={"../pages/VolcanoList.jsx"}
+                className="mx-2 text-danger"
+              >
+                here
+              </Link>
+              to start your volcanic adventure!!
+            </h2>
+          </div>
         </div>
       </section>
       <Footer />

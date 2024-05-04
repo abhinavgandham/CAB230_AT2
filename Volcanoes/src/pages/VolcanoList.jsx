@@ -151,28 +151,38 @@ export default function VolcanoList({ isLoggedIn, token }) {
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
-      <div
-        className="ag-theme-balham-dark justify-content-center mx-auto mt-5"
-        style={{
-          height: "300px",
-          width: "600px",
-        }}
-      >
-        <CountrySelect
-          targetCountry={country}
-          dataSet={listData}
-          displayData={displaySelectedData}
-        />
-        <PopulationSelect findWithPopulation={findViaPopulation} />
-        {
+      <div className="container mt-5">
+        <div
+          className="ag-theme-balham-dark justify-content-center mx-auto mt-5"
+          style={{
+            height: "300px",
+          }}
+        >
+          <div className="row mt-3">
+            <div className="col-sm-12 mb-2">
+              <CountrySelect
+                targetCountry={country}
+                dataSet={listData}
+                displayData={displaySelectedData}
+              />
+            </div>
+          </div>
+          s
+          <div className="col-sm-12 mb-2">
+            <PopulationSelect findWithPopulation={findViaPopulation} />
+          </div>
           <AgGridReact
+            className="table-responsive"
             columnDefs={columns}
             rowData={rowData}
             pagination={true}
             onCellClicked={countryId}
           />
-        }
-        <CountrySearch country={country} selectionData={displaySelectedData} />
+          <CountrySearch
+            country={country}
+            selectionData={displaySelectedData}
+          />
+        </div>
       </div>
       <Footer />
     </div>
@@ -218,10 +228,10 @@ function CountrySearch({ country, selectionData }) {
         <label htmlFor="Search Country" className="form-label fs-4 text-dark">
           Search Country
         </label>
-        <div className="col-md-6">
+        <div className="input-group">
           <input
             type="text"
-            className="form-control input-sm"
+            className="form-control"
             value={country}
             onChange={selectionData}
           ></input>

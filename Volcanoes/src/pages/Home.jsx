@@ -3,7 +3,6 @@ import Footer from "../components/Footer";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 import { Link } from "react-router-dom";
 
-// -------The component for the home page---------
 // eslint-disable-next-line react/prop-types
 export default function Home({ isLoggedIn }) {
   return (

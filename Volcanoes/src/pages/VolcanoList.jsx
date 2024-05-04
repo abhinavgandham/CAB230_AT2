@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { AgGridReact } from "ag-grid-react";
@@ -10,14 +11,11 @@ import NavBarLoggedIn from "../components/NavBarLoggedIn";
 // eslint-disable-next-line react/prop-types
 export default function VolcanoList({ isLoggedIn, token }) {
   console.log("VolcanoList", isLoggedIn);
-  console.log(token);
   const [listData, setListData] = useState([]);
   const [country, setCountry] = useState("");
   const [population, setPopulation] = useState("");
   const [rowData, setRowData] = useState([]);
   const navigate = useNavigate();
-
-  // http://4.237.58.241:3000/volcanoes?country=India//
 
   function displaySelectedData(e) {
     setCountry(e.target.value);
@@ -191,7 +189,6 @@ export default function VolcanoList({ isLoggedIn, token }) {
   );
 }
 
-// eslint-disable-next-line react/prop-types
 function CountrySelect({ targetCountry, dataSet, displayData }) {
   return (
     <select
@@ -201,7 +198,6 @@ function CountrySelect({ targetCountry, dataSet, displayData }) {
       onChange={displayData}
     >
       <option>Country</option>
-      {/* eslint-disable-next-line react/prop-types  */}
       {dataSet.map((country) => {
         return (
           <option key={country} value={country}>
@@ -213,7 +209,6 @@ function CountrySelect({ targetCountry, dataSet, displayData }) {
   );
 }
 
-// eslint-disable-next-line react/prop-types
 function PopulationSelect({ findWithPopulation }) {
   return (
     <select className="form-select" onChange={findWithPopulation}>

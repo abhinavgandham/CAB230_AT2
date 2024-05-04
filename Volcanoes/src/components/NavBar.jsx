@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
-    <ul className="navbar bg-dark list-unstyled d-flex justify-content-between align-items-center">
+    <ul className="bg-dark list-unstyled d-flex">
       <h1>
         <Link to={"/"} className="text-light text-decoration-none">
           Volcano Sight
         </Link>
+        s
       </h1>
-      <li className="nav-item ">
+      <li className="mt-3">
         <Link
           className="nav-link text-light"
           style={{ marginLeft: "5px" }}
@@ -17,16 +18,17 @@ export default function NavBar() {
           Home
         </Link>
       </li>
-      <li className="nav-item " style={{ marginLeft: "-10px" }}>
+      s
+      <li className="mt-3" style={{ paddingRight: "20px" }}>
         <Link
-          className="nav-link text-light"
+          className="nav-link text-light mr-3"
           style={{ marginLeft: "10px" }}
           to={"../pages/VolcanoList.jsx"}
         >
           Volcano List
         </Link>
       </li>
-      <li className="nav-item " style={{ marginLeft: "-10px" }}>
+      <li className="mt-3" style={{ paddingLeft: "20px" }}>
         <Link
           className="nav-link text-light"
           style={{ marginLeft: "-10px" }}
@@ -35,7 +37,7 @@ export default function NavBar() {
           Login
         </Link>
       </li>
-      <li className="nav-item">
+      <li className="mt-3" style={{ paddingLeft: "20px" }}>
         <Link
           className="nav-link text-light "
           style={{ marginRight: "5px" }}

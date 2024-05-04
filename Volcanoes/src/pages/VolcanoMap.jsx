@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Map, Marker } from "pigeon-maps";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -39,64 +40,17 @@ export default function VolcanoMap({ isLoggedIn }) {
             <Marker anchor={center} />
           </Map>
         </section>
-        {isLoggedIn ? (
-          <div className="col-sm-1">
-            <p className="fs-6">
-              <strong>Country:</strong> {country}
-            </p>
-            <p className="fs-6">
-              <strong>Region:</strong> {region}
-            </p>
-            <div></div>
-            <p className="fs-6">
-              <strong>Sub Region:</strong> {subRegion}
-            </p>
-            <p className="fs-6">
-              <strong>Last Eruption:</strong> {lastErruption}
-            </p>
-            <p className="fs-6">
-              <strong>Summit:</strong> {summit}
-            </p>
-            <p className="fs-6">
-              <strong>Elevation:</strong> {elevation}
-            </p>
-            <p className="fs-6">
-              <strong>Latitude:</strong> {latitude}
-            </p>
-            <p className="fs-6">
-              <strong>Longitude:</strong> {longitude}
-            </p>
-          </div>
-        ) : (
-          <div className="col-md-11">
-            <h2 className="text-center mb-3">
-              <strong>Country:</strong> {country}
-            </h2>
-            <h2 className="text-center mb-3">
-              <strong>Region:</strong> {region}
-            </h2>
-            <div></div>
-            <h2 className="text-center mb-3">
-              <strong>Sub Region:</strong> {subRegion}
-            </h2>
-            <h2 className="text-center mb-3">
-              <strong>Last Eruption:</strong> {lastErruption}
-            </h2>
-            <h2 className="text-center mb-3">
-              <strong>Summit:</strong> {summit}
-            </h2>
-            <h2 className="text-center mb-3">
-              <strong>Elevation:</strong> {elevation}
-            </h2>
-            <h2 className="text-center mb-3">
-              <strong>Latitude:</strong> {latitude}
-            </h2>
-            <h2 className="text-center mb-3">
-              <strong>Longitude:</strong> {longitude}
-            </h2>
-          </div>
-        )}
-
+        <VolcanoDetails
+          isLoggedIn={isLoggedIn}
+          country={country}
+          region={region}
+          subRegion={subRegion}
+          lastErruption={lastErruption}
+          summit={summit}
+          elevation={elevation}
+          latitude={latitude}
+          longitude={longitude}
+        />
         {isLoggedIn ? (
           <div>
             <h1 className="text-center mt-5">Population Density</h1>
@@ -106,6 +60,80 @@ export default function VolcanoMap({ isLoggedIn }) {
       </div>
     </div>
   );
+}
+
+function VolcanoDetails({
+  isLoggedIn,
+  country,
+  region,
+  subRegion,
+  lastErruption,
+  summit,
+  elevation,
+  latitude,
+  longitude,
+}) {
+  if (isLoggedIn) {
+    return (
+      <div className="col-sm-1">
+        <p className="fs-6">
+          <strong>Country:</strong> {country}
+        </p>
+        <p className="fs-6">
+          <strong>Region:</strong> {region}
+        </p>
+        <div></div>
+        <p className="fs-6">
+          <strong>Sub Region:</strong> {subRegion}
+        </p>
+        <p className="fs-6">
+          <strong>Last Eruption:</strong> {lastErruption}
+        </p>
+        <p className="fs-6">
+          <strong>Summit:</strong> {summit}
+        </p>
+        <p className="fs-6">
+          <strong>Elevation:</strong> {elevation}
+        </p>
+        <p className="fs-6">
+          <strong>Latitude:</strong> {latitude}
+        </p>
+        <p className="fs-6">
+          <strong>Longitude:</strong> {longitude}
+        </p>
+      </div>
+    );
+  } else {
+    return (
+      <div className="col-md-11">
+        <h2 className="text-center mb-3">
+          <strong>Country:</strong> {country}
+        </h2>
+        <h2 className="text-center mb-3">
+          <strong>Region:</strong> {region}
+        </h2>
+        <div></div>
+        <h2 className="text-center mb-3">
+          <strong>Sub Region:</strong> {subRegion}
+        </h2>
+        <h2 className="text-center mb-3">
+          <strong>Last Eruption:</strong> {lastErruption}
+        </h2>
+        <h2 className="text-center mb-3">
+          <strong>Summit:</strong> {summit}
+        </h2>
+        <h2 className="text-center mb-3">
+          <strong>Elevation:</strong> {elevation}
+        </h2>
+        <h2 className="text-center mb-3">
+          <strong>Latitude:</strong> {latitude}
+        </h2>
+        <h2 className="text-center mb-3">
+          <strong>Longitude:</strong> {longitude}
+        </h2>
+      </div>
+    );
+  }
 }
 
 // eslint-disable-next-line react/prop-types
@@ -134,7 +162,6 @@ function BarChart({ data }) {
   return <canvas ref={chartRef} style={{ width: "20px", height: "50px" }} />;
 }
 
-// eslint-disable-next-line react/prop-types
 function ChartContainer({ populationData }) {
   const data = {
     labels: ["5km", "10km", "30km", "100km"],

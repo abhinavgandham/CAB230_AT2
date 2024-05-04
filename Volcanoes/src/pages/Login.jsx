@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -114,7 +115,6 @@ export default function Login() {
   );
 }
 
-// eslint-disable-next-line react/prop-types
 function Message({ message }) {
   const [messageVisible, setMessageVisible] = useState(false);
 

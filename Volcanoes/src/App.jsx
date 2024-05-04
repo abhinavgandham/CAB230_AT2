@@ -11,7 +11,6 @@ import { useEffect } from "react";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
-  console.log(isLoggedIn);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

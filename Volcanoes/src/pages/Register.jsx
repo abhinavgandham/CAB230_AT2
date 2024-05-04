@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
@@ -152,7 +153,6 @@ export default function Register() {
   );
 }
 
-// eslint-disable-next-line react/prop-types
 function Message({ message }) {
   const [messageVisible, setMessageVisible] = useState(false);
 

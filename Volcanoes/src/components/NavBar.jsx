@@ -28,7 +28,7 @@ export default function NavBar() {
           Volcano List
         </Link>
       </li>
-      <li className="mt-3" style={{ paddingLeft: "20px" }}>
+      <li className="mt-3" style={{ paddingLeft: "10px" }}>
         <Link
           className="nav-link text-light"
           style={{ marginLeft: "-10px" }}

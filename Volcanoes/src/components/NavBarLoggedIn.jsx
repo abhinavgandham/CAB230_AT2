@@ -12,23 +12,23 @@ export default function NavBarLoggedIn() {
     return () => clearTimeout(refresh);
   }
   return (
-    <ul className="navbar bg-dark  list-unstyled">
+    <ul className="bg-dark list-unstyled d-flex">
       <h1>
         <Link to={"/"} className="text-light text-decoration-none">
           Volcano Sight
         </Link>
       </h1>
-      <li className="nav-item mx-auto">
+      <li className="mt-3" style={{ paddingLeft: "20px" }}>
         <Link className="nav-link text-light" to="/">
           Home
         </Link>
       </li>
-      <li className="nav-item mx-auto">
+      <li className="mt-3" style={{ paddingLeft: "20px" }}>
         <Link className="nav-link text-light" to={"../pages/VolcanoList.jsx"}>
           Volcano List
         </Link>
       </li>
-      <li className="nav-item mx-auto">
+      <li className="mt-3" style={{ paddingLeft: "20px" }}>
         <Link className="nav-link text-light" to={"/"} onClick={logout}>
           Logout
         </Link>

@@ -152,7 +152,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
       <div
-        className="ag-theme-balham-dark justify-content-center mx-auto"
+        className="ag-theme-balham-dark justify-content-center mx-auto mt-5"
         style={{
           height: "300px",
           width: "600px",

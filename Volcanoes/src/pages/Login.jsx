@@ -12,6 +12,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState("");
+  const [emailEntered, setEmailEntered] = useState(null);
+  const [passwordEntered, setPasswordEntered] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [inCorrect, setInCorrect] = useState(null);
   const navigate = useNavigate();
@@ -56,13 +58,16 @@ export default function Login() {
     if (regex.test(value) || value === "") {
       setEmailError(null);
     } else {
-      setEmailError("Email is not in correct format");
+      setEmailError(
+        "Please enter a valid email address such as 'username@example.com'"
+      );
     }
     setEmail(value);
   }
 
   function validatePassword(e) {
     const { value } = e.target;
+    setPasswordEntered(true);
     const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
 
@@ -92,16 +97,27 @@ export default function Login() {
               className="form-control-lg w-30 mt-2"
               value={email}
               onChange={validateEmail}
+              onBlur={() => {
+                setEmailEntered(true);
+              }}
+              onFocus={() => {
+                setEmailEntered(false);
+              }}
             />
-            {emailError != null ? <p>Error: {emailError}</p> : null}
+            {emailEntered ? <>{emailError}</> : null}
             <label className="mt-5">Password</label>
             <input
               type="password"
               className="form-control-lg w-30 mt-2"
               value={password}
               onChange={validatePassword}
+              onBlur={() => {
+                setPasswordEntered(true);
+              }}
             />
-            {passwordError != null ? <p>Error: {passwordError}</p> : null}
+            {passwordEntered && passwordError ? (
+              <p>Error: {passwordError}</p>
+            ) : null}
             <button
               type="submit"
               className="btn btn-danger mt-5"

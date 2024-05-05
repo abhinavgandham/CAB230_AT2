@@ -8,10 +8,8 @@ export const API_URL = "http://4.237.58.241:3000";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [firstNameError, setFirstNameError] = useState(null);
-  const [lastNameError, setLastNameError] = useState(null);
+  const [emailEntered, setEmailEntered] = useState(null);
+  const [passwordEntered, setPasswordEntered] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [accountAlreadyRegistered, setAccountAlreadyRegistered] =
@@ -46,28 +44,6 @@ export default function Register() {
         }
       })
       .catch((e) => console.log(e));
-  }
-
-  function validateFirstName(e) {
-    const { value } = e.target;
-    const regex = /^[a-zA-Z]+(?: [a-zA-Z]+)?$/;
-    if (regex.test(value) || value === "") {
-      setFirstNameError(null);
-    } else {
-      setFirstNameError("Incorrect format");
-    }
-    setFirstName(value);
-  }
-
-  function validateLastName(e) {
-    const { value } = e.target;
-    const regex = /^[a-zA-Z]+(?: [a-zA-Z]+)?$/;
-    if (regex.test(value) || value === "") {
-      setLastNameError(null);
-    } else {
-      setLastNameError("Incorrect format");
-    }
-    setLastName(value);
   }
 
   function validateEmail(e) {
@@ -107,37 +83,33 @@ export default function Register() {
         <div className="border border-danger border-5 rounded shadow p-4">
           <h1 className="text-center">Register</h1>
           <div className="form-group d-flex flex-column align-items-center">
-            <label className="mt-3">Firstname</label>
-            <input
-              type="text"
-              className="form-control-lg w-30 flex-row "
-              value={firstName}
-              onChange={validateFirstName}
-            />
-            {firstNameError != null ? <p>Error: {firstNameError}</p> : null}
-            <label className="mt-3">Lastname</label>
-            <input
-              type="text"
-              className="form-control-lg w-30 flex-row "
-              value={lastName}
-              onChange={validateLastName}
-            />
-            {lastNameError != null ? <p>Error: {lastNameError}</p> : null}
             <label className="mt-3">Email</label>
             <input
               type="email"
               className="form-control-lg w-30 flex-row "
               value={email}
               onChange={validateEmail}
+              onBlur={() => {
+                setEmailEntered(true);
+              }}
+              onFocus={() => {
+                setEmailEntered(false);
+              }}
             />
-            {emailError != null ? <p>Error: {emailError}</p> : null}
+            {emailEntered ? <>{emailError}</> : null}
             <label className="mt-3">Password</label>
             <input
               type="password"
               className="form-control-lg w-30 "
               onChange={validatePassword}
+              onBlur={() => {
+                setPasswordEntered(true);
+              }}
+              onFocus={() => {
+                setPasswordEntered(null);
+              }}
             />
-            {passwordError != null ? <p>Error: {passwordError}</p> : null}
+            {passwordEntered ? <>{passwordError}</> : null}
             <button
               type="submit"
               className="btn btn-danger mt-4"

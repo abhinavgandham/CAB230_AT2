@@ -35,7 +35,7 @@ export default function VolcanoMap({ isLoggedIn }) {
         Back
       </button>
       <div className="row justify-content-center mt-4">
-        <section className="col-md-8 mb-4  text-center">
+        <section className="col-md-8 text-center">
           <Map center={center} height={500} width={1100}>
             <Marker anchor={center} />
           </Map>
@@ -51,12 +51,14 @@ export default function VolcanoMap({ isLoggedIn }) {
           latitude={latitude}
           longitude={longitude}
         />
-        {isLoggedIn ? (
-          <div>
-            <h1 className="text-center mt-5">Population Density</h1>
-            <ChartContainer populationData={populations} />
-          </div>
-        ) : null}
+        <div className="col-md-4 col-sm-12">
+          {isLoggedIn ? (
+            <div>
+              <h1 className="text-center mt-5">Population Density</h1>
+              <ChartContainer populationData={populations} />
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );
@@ -148,7 +150,7 @@ function BarChart({ data }) {
 
     if (chartRef.current && data) {
       instanceOfChart.current = new Chart(chartRef.current, {
-        type: "bar",
+        type: "pie",
         data: data,
       });
     }
@@ -169,7 +171,7 @@ function ChartContainer({ populationData }) {
       {
         label: "Population Density",
         data: populationData,
-        backgroundColor: "red",
+        backgroundColor: ["red", "blue", "green", "yellow"],
         borderColor: "black",
         borderWidth: 2,
       },

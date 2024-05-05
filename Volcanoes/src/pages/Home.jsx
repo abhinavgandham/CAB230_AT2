@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
@@ -12,39 +13,29 @@ export default function Home({ isLoggedIn }) {
         <h1 className="display-5 mt-2 bg-light fw-bold text-center">
           Welcome to Volcano Sight
         </h1>
+        <h2>
+          Discover the world's volcanoes with Volcano Sight. Explore fascinating
+          information about volcanoes across different countries, all in one
+          place. Whether you're an adventurer or a curious enthusiast, start
+          your journey{" "}
+          <Link className="text-danger" to={"../pages/VolcanoList.jsx"}>
+            here
+          </Link>
+        </h2>
         <div className="row mt-5">
           <div className="col-md-6">
             <img
               src="../../src/images/volcano.jpeg"
-              className="img-fluid w-80 mt-5"
+              className="img-fluid w-100 mt-5"
               alt="Image of volcano"
             />
           </div>
-          <div
-            className="
-          border border-danger border-5 rounded shadow bg-dark text-light
-          col-md-5 mt-5 flex-row justify-content-center 
-          align-items-center"
-          >
-            {!isLoggedIn ? (
-              <h2 className="text-center mt-5">
-                Click
-                <Link to={"../pages/Login.jsx"} className="mx-2 text-danger">
-                  here
-                </Link>
-                to login
-              </h2>
-            ) : null}
-            <h2 className="text-center mt-5">
-              Click
-              <Link
-                to={"../pages/VolcanoList.jsx"}
-                className="mx-2 text-danger"
-              >
-                here
-              </Link>
-              to start your volcanic adventure!!
-            </h2>
+          <div className="col-md-6">
+            <img
+              src="../../src/images/volcanoTwo.jpeg"
+              className="img-fluid w-100 mt-5"
+              alt="Another volcano image"
+            />
           </div>
         </div>
       </section>

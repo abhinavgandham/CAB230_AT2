@@ -2,7 +2,6 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 
 export const API_URL = "http://4.237.58.241:3000";
 export default function Register() {
@@ -53,7 +52,9 @@ export default function Register() {
     if (regex.test(value) || value === "") {
       setEmailError(null);
     } else {
-      setEmailError("Email is not in correct format");
+      setEmailError(
+        "Please enter a valid email address such as 'username@example.com'"
+      );
     }
     setEmail(value);
   }

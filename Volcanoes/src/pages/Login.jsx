@@ -67,7 +67,6 @@ export default function Login() {
 
   function validatePassword(e) {
     const { value } = e.target;
-    setPasswordEntered(true);
     const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
 
@@ -95,13 +94,14 @@ export default function Login() {
             <input
               type="email"
               className="form-control-lg w-30 mt-2"
+              placeholder="username@example.com"
               value={email}
               onChange={validateEmail}
               onBlur={() => {
                 setEmailEntered(true);
               }}
               onFocus={() => {
-                setEmailEntered(false);
+                setEmailEntered();
               }}
             />
             {emailEntered ? <>{emailError}</> : null}
@@ -109,10 +109,16 @@ export default function Login() {
             <input
               type="password"
               className="form-control-lg w-30 mt-2"
+              required
+              minLength={8}
+              placeholder="*********"
               value={password}
               onChange={validatePassword}
               onBlur={() => {
                 setPasswordEntered(true);
+              }}
+              onFocus={() => {
+                setPasswordEntered(null);
               }}
             />
             {passwordEntered && passwordError ? (
@@ -128,7 +134,9 @@ export default function Login() {
           </div>
           <p className="text-center mt-5">
             Don't have an account?{" "}
-            <Link to={"../pages/Register.jsx"}>Register</Link>
+            <Link className="text-danger" to={"../pages/Register.jsx"}>
+              Register
+            </Link>
           </p>
         </div>
         {inCorrect ? (

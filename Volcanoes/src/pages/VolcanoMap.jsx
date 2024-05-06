@@ -50,7 +50,12 @@ export default function VolcanoMap({ isLoggedIn }) {
               : "col-lg-5 col-md-12 p-4 border border-danger bg-dark shadow"
           }
         >
-          <Map center={center} height={500} width={isLoggedIn ? 450 : 570}>
+          <Map
+            center={center}
+            zoom={6}
+            height={500}
+            width={isLoggedIn ? 450 : 570}
+          >
             <Marker anchor={center} />
           </Map>
         </section>

@@ -18,7 +18,14 @@ export default function Login() {
   const [inCorrect, setInCorrect] = useState(null);
   const navigate = useNavigate();
 
+  function resetStates() {
+    setEmailError(null);
+    setPasswordError(null);
+    setInCorrect(null);
+  }
+
   function login() {
+    resetStates();
     const endPoint = `${API_URL}/user/login`;
 
     return fetch(endPoint, {
@@ -97,6 +104,7 @@ export default function Login() {
             password={password}
             validatePassword={validatePassword}
             setPasswordEntered={setPasswordEntered}
+            s
             passwordEntered={passwordEntered}
             passwordError={passwordError}
           />
@@ -108,13 +116,14 @@ export default function Login() {
               Register
             </Link>
           </p>
+          {inCorrect ? (
+            <Message message={"Incorrect email or password"} />
+          ) : passwordError ? (
+            <Message message={"There was an error"} />
+          ) : null}
         </div>
       </div>
-      {inCorrect ? (
-        <Message message={"Incorrect email or password"} />
-      ) : passwordError ? (
-        <Message message={"There was an error"} />
-      ) : null}
+
       <Footer />
     </div>
   );

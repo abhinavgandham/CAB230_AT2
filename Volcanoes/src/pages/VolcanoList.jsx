@@ -157,7 +157,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
             height: "300px",
           }}
         >
-          <div className="row mt-3">
+          <div className="row mt-2">
             <div className="col-sm-12 mb-2">
               <CountrySelect
                 targetCountry={country}
@@ -222,7 +222,7 @@ function PopulationSelect({ findWithPopulation }) {
 
 function CountrySearch({ country, selectionData }) {
   return (
-    <div className="container mt-5">
+    <div className="container mt-3">
       <div className="border border-danger border-2 rounded shadow p-3">
         <label htmlFor="Search Country" className="form-label fs-4 text-dark">
           Quick Search (Country)

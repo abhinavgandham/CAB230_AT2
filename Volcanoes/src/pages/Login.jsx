@@ -152,7 +152,7 @@ function EmailandPasswordInput({
       <label className="mt-5">Password</label>
       <input
         type="password"
-        className="form-control-lg w-30 mt-2"
+        className="form-control-lg w-50 mt-2"
         required
         minLength={8}
         placeholder="*********"
@@ -173,7 +173,11 @@ function EmailandPasswordInput({
 function LoginButton({ login }) {
   return (
     <div className="text-center">
-      <button type="submit" className="btn btn-danger mt-5" onClick={login}>
+      <button
+        type="submit"
+        className="btn btn-danger w-50 mt-5 fs-5"
+        onClick={login}
+      >
         Login
       </button>
     </div>

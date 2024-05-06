@@ -8,6 +8,7 @@ import { useRef } from "react";
 import NavBar from "../components/NavBar";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 import Chart from "chart.js/auto";
+import arrow from "../images/arrow.png";
 
 // eslint-disable-next-line react/prop-types
 export default function VolcanoMap({ isLoggedIn }) {
@@ -31,9 +32,16 @@ export default function VolcanoMap({ isLoggedIn }) {
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
       <h1 className="text-center mt-5">{name}</h1>
-      <button className="btn btn-danger fs-4" onClick={backToList}>
-        Back
-      </button>
+      <div className="d-flex align-items-center mb-3">
+        <img
+          onClick={backToList}
+          src={arrow}
+          width={30}
+          className="mr-2"
+          alt="Back arrow"
+        ></img>
+        <p className="mt-3 text-danger">Go Back</p>
+      </div>
       <div className="row justify-content-center mt-4">
         <section className="col-lg-4 col-md-12">
           <Map center={center} height={500} width={550}>

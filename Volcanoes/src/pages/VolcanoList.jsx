@@ -3,9 +3,9 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { AgGridReact } from "ag-grid-react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
-import { useNavigate } from "react-router-dom";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 
 // eslint-disable-next-line react/prop-types

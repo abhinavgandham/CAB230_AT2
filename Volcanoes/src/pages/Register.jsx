@@ -68,7 +68,7 @@ export default function Register() {
       setPasswordError(null);
     } else {
       setPasswordError(
-        "Password must contain 8 characters with mix of uppercase, lowercase, numbers, and special characters, avoiding common words or patterns."
+        "Password is not in correct format, either password length is greater than 12 characters or some characters are invalid."
       );
     }
     setPassword(value);
@@ -83,38 +83,18 @@ export default function Register() {
       >
         <div className="border border-danger border-5 rounded shadow p-4">
           <h1 className="text-center">Register</h1>
-          <div className="form-group d-flex flex-column align-items-center">
-            <label className="mt-3">Email</label>
-            <input
-              type="email"
-              className="form-control-lg w-30 flex-row "
-              required
-              minLength={8}
-              value={email}
-              onChange={validateEmail}
-              onBlur={() => {
-                setEmailEntered(true);
-              }}
-              onFocus={() => {
-                setEmailEntered(false);
-              }}
+          <div className="d-flex flex-column align-items-center">
+            <EmailandPassword
+              email={email}
+              validateEmail={validateEmail}
+              setEmailEntered={setEmailEntered}
+              emailEntered={emailEntered}
+              emailError={emailError}
+              validatePassword={validatePassword}
+              setPasswordEntered={setPasswordEntered}
+              passwordEntered={passwordEntered}
+              passwordError={passwordError}
             />
-            {emailEntered ? <>{emailError}</> : null}
-            <label className="mt-3">Password</label>
-            <input
-              type="password"
-              className="form-control-lg w-30 "
-              required
-              minLength={8}
-              onChange={validatePassword}
-              onBlur={() => {
-                setPasswordEntered(true);
-              }}
-              onFocus={() => {
-                setPasswordEntered(null);
-              }}
-            />
-            {passwordEntered ? <>{passwordError}</> : null}
             <button
               type="submit"
               className="btn btn-danger mt-4"
@@ -133,6 +113,55 @@ export default function Register() {
         <Message message={"Account has been successfully created!"} />
       ) : null}
       <Footer />
+    </div>
+  );
+}
+function EmailandPassword({
+  email,
+  validateEmail,
+  setEmailEntered,
+  emailEntered,
+  emailError,
+  validatePassword,
+  setPasswordEntered,
+  passwordEntered,
+  passwordError,
+}) {
+  return (
+    <div className="form-group d-flex flex-column align-items-center">
+      <label className="mt-3">Email</label>
+      <input
+        type="email"
+        className="form-control-lg w-30 flex-row "
+        required
+        minLength={8}
+        placeholder="username@example.com"
+        value={email}
+        onChange={validateEmail}
+        onBlur={() => {
+          setEmailEntered(true);
+        }}
+        onFocus={() => {
+          setEmailEntered(false);
+        }}
+      />
+      {emailEntered ? <>{emailError}</> : null}
+      <label className="mt-3">Password</label>
+      <input
+        type="password"
+        className="form-control-lg w-30 "
+        required
+        minLength={8}
+        placeholder="********"
+        onChange={validatePassword}
+        onBlur={() => {
+          setPasswordEntered(true);
+        }}
+        onFocus={() => {
+          setPasswordEntered(null);
+        }}
+      />
+      {passwordEntered ? <>{passwordError}</> : null}
     </div>
   );
 }

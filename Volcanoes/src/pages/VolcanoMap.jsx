@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Map, Marker } from "pigeon-maps";
 import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 import NavBar from "../components/NavBar";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
@@ -12,10 +12,6 @@ import arrow from "../images/arrow.png";
 
 // eslint-disable-next-line react/prop-types
 export default function VolcanoMap({ isLoggedIn }) {
-  const navigate = useNavigate();
-  function backToList() {
-    navigate("../pages/VolcanoList.jsx");
-  }
   const location = useLocation();
   const latitude = location.state.targetLatitude;
   const longitude = location.state.targetLongitude;
@@ -32,15 +28,14 @@ export default function VolcanoMap({ isLoggedIn }) {
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
       <h1 className="text-center mt-5">{name}</h1>
-      <div className="d-flex align-items-center mb-3">
-        <img
-          onClick={backToList}
-          src={arrow}
-          width={30}
-          className="mr-2"
-          alt="Back arrow"
-        ></img>
-        <p className="mt-3 text-danger">Go Back</p>
+      <div>
+        <Link
+          className="d-flex align-items-center mb-3"
+          to={"../pages/VolcanoList.jsx"}
+        >
+          <img src={arrow} width={30} className="mr-2" alt="Back arrow"></img>
+          <p className="mt-3 text-danger">Go Back</p>
+        </Link>
       </div>
       <div className="row justify-content-center">
         <section

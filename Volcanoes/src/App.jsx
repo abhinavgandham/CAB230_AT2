@@ -30,10 +30,7 @@ function App() {
             path="pages/VolcanoList.jsx"
             element={<VolcanoList isLoggedIn={isLoggedIn} token={token} />}
           />
-          <Route
-            path="pages/Login.jsx"
-            element={<Login isLoggedIn={isLoggedIn} />}
-          />
+          <Route path="pages/Login.jsx" element={<Login />} />
           <Route path="pages/Register.jsx" element={<Register />} />
           <Route
             path="pages/VolcanoMap.jsx"

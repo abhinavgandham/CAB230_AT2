@@ -14,7 +14,7 @@ export default function Home({ isLoggedIn }) {
           Welcome to Volcano Sight
         </h1>
         <section className="border border-danger shadow p-4 bg-dark text-light">
-          <h2>
+          <h5>
             Discover the world's volcanoes with Volcano Sight. Explore
             fascinating information about volcanoes across different countries,
             all in one place. Whether you're an adventurer or a curious
@@ -22,7 +22,7 @@ export default function Home({ isLoggedIn }) {
             <Link className="text-danger" to={"../pages/VolcanoList.jsx"}>
               here
             </Link>
-          </h2>
+          </h5>
         </section>
         <div className="row">
           <div>

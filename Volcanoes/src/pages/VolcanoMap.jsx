@@ -46,11 +46,11 @@ export default function VolcanoMap({ isLoggedIn }) {
         <section
           className={
             isLoggedIn
-              ? "col-lg-4 p-4 border border-danger bg-dark shadow"
+              ? "col-lg-4 p-4 border border-dark bg-dark shadow"
               : "col-lg-5 col-md-12 p-4 border border-danger bg-dark shadow"
           }
         >
-          <Map center={center} height={500} width={isLoggedIn ? 450 : 580}>
+          <Map center={center} height={500} width={isLoggedIn ? 450 : 570}>
             <Marker anchor={center} />
           </Map>
         </section>
@@ -129,7 +129,7 @@ function VolcanoDetails({
     );
   } else {
     return (
-      <div className="col-md-11">
+      <div className="col-md-12 mt-3">
         <h2 className="text-center mb-3">
           <strong>Country:</strong> {country}
         </h2>

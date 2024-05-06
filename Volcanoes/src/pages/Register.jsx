@@ -107,13 +107,8 @@ export default function Register() {
               passwordEntered={passwordEntered}
               passwordError={passwordError}
             />
-            <button
-              type="submit"
-              className="btn btn-danger mt-4"
-              onClick={register}
-            >
-              Register
-            </button>
+            <RegisterButton register={register} />
+
             {accountRegisterError ? (
               <Message message={"Both email and password are required"} />
             ) : accountAlreadyRegistered ? (
@@ -176,6 +171,18 @@ function EmailandPassword({
       />
       {passwordEntered ? <>{passwordError}</> : null}
     </div>
+  );
+}
+
+function RegisterButton({ register }) {
+  return (
+    <button
+      type="submit"
+      className="btn btn-danger mt-4 w-50"
+      onClick={register}
+    >
+      Register
+    </button>
   );
 }
 

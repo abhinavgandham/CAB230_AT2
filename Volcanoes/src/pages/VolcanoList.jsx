@@ -171,7 +171,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
             <PopulationSelect findWithPopulation={findViaPopulation} />
           </div>
           <AgGridReact
-            className="table-responsive"
+            className="table-responsive mt-5"
             columnDefs={columns}
             rowData={rowData}
             pagination={true}

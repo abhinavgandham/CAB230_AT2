@@ -86,7 +86,7 @@ export default function Login() {
         className="container mt-5"
         style={{ maxWidth: "800px", margin: "auto" }}
       >
-        <div className="border border-danger border-5 rounded shadow p-4">
+        <div className="border border-danger bg-dark text-light border-5 rounded shadow p-4">
           <h1 className="text-center">Login</h1>
           <EmailandPasswordInput
             email={email}

@@ -93,7 +93,7 @@ export default function Register() {
         className="container mt-5"
         style={{ maxWidth: "800px", margin: "auto" }}
       >
-        <div className="border border-danger border-5 rounded shadow p-4">
+        <div className="border border-danger bg-dark text-light border-5 rounded shadow p-4">
           <h1 className="text-center">Register</h1>
           <div className="d-flex flex-column align-items-center">
             <EmailandPassword
@@ -162,7 +162,7 @@ function EmailandPassword({
       <label className="mt-3">Password</label>
       <input
         type="password"
-        className="form-control-lg w-30 "
+        className="form-control-lg w-30"
         required
         minLength={8}
         placeholder="********"

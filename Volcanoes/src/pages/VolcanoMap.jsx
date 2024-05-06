@@ -44,13 +44,23 @@ export default function VolcanoMap({ isLoggedIn }) {
       </div>
       <div className="row justify-content-center">
         <section
-          className={isLoggedIn ? "col-lg-4 p-4" : "col-lg-5 col-md-12 p-4"}
+          className={
+            isLoggedIn
+              ? "col-lg-4 p-4 border border-danger bg-dark shadow"
+              : "col-lg-5 col-md-12 p-4 border border-danger bg-dark shadow"
+          }
         >
-          <Map center={center} height={500} width={550}>
+          <Map center={center} height={500} width={isLoggedIn ? 450 : 580}>
             <Marker anchor={center} />
           </Map>
         </section>
-        <section className={isLoggedIn ? "col-lg-4" : null}>
+        <section
+          className={
+            isLoggedIn
+              ? "col-lg-4 border border-danger bg-dark shadow text-light"
+              : null
+          }
+        >
           <VolcanoDetails
             isLoggedIn={isLoggedIn}
             country={country}
@@ -65,7 +75,7 @@ export default function VolcanoMap({ isLoggedIn }) {
         </section>
         <div className="col-lg-4">
           {isLoggedIn ? (
-            <div>
+            <div className="border border-danger bg-dark text-light">
               <h1 className="text-center mt-5">Population Density</h1>
               <ChartContainer populationData={populations} />
             </div>
@@ -89,7 +99,7 @@ function VolcanoDetails({
 }) {
   if (isLoggedIn) {
     return (
-      <div className="text-center">
+      <div className="text-center mt-5">
         <p className="fs-6">
           <strong>Country:</strong> {country}
         </p>

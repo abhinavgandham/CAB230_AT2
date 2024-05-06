@@ -138,7 +138,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
   }, [country]);
 
   useEffect(() => {
-    if (country != "" && population != "") {
+    if (country != "" && population != "" && population != "Populated Within") {
       fetch(
         `http://4.237.58.241:3000/volcanoes?country=${country}&populatedWithin=${population}`
       )
@@ -152,7 +152,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
       <div className="container mt-5">
         <div
-          className="ag-theme-balham-dark justify-content-center mx-auto mt-5"
+          className="ag-theme-balham-dark justify-content-center mx-auto"
           style={{
             height: "300px",
           }}
@@ -225,7 +225,7 @@ function CountrySearch({ country, selectionData }) {
     <div className="container mt-5">
       <div className="border border-danger border-2 rounded shadow p-3">
         <label htmlFor="Search Country" className="form-label fs-4 text-dark">
-          Search Country
+          Quick Search (Country)
         </label>
         <div className="input-group">
           <input

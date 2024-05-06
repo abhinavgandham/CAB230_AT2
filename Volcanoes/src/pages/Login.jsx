@@ -33,14 +33,13 @@ export default function Login() {
     })
       .then((res) => {
         if (!res.ok) {
+          console.log(res);
           setInCorrect("Incorrect email or password");
           throw new Error("Incorrect email or password");
         }
         return res.json();
       })
       .then((data) => {
-        console.log(data);
-        console.log(data.token);
         const token = data.token;
         localStorage.setItem("token", token);
 
@@ -138,7 +137,7 @@ function EmailandPasswordInput({
       <label className="mt-5">Email</label>
       <input
         type="email"
-        className="form-control-lg w-30 mt-2"
+        className="form-control-lg w-50 mt-2"
         placeholder="username@example.com"
         value={email}
         onChange={validateEmail}

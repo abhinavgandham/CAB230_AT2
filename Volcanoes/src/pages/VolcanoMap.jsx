@@ -42,24 +42,28 @@ export default function VolcanoMap({ isLoggedIn }) {
         ></img>
         <p className="mt-3 text-danger">Go Back</p>
       </div>
-      <div className="row justify-content-center mt-4">
-        <section className="col-lg-4 col-md-12">
+      <div className="row justify-content-center">
+        <section
+          className={isLoggedIn ? "col-lg-4 p-4" : "col-lg-5 col-md-12 p-4"}
+        >
           <Map center={center} height={500} width={550}>
             <Marker anchor={center} />
           </Map>
         </section>
-        <VolcanoDetails
-          isLoggedIn={isLoggedIn}
-          country={country}
-          region={region}
-          subRegion={subRegion}
-          lastErruption={lastErruption}
-          summit={summit}
-          elevation={elevation}
-          latitude={latitude}
-          longitude={longitude}
-        />
-        <div className="col-lg-3 col-m-112">
+        <section className={isLoggedIn ? "col-lg-4" : null}>
+          <VolcanoDetails
+            isLoggedIn={isLoggedIn}
+            country={country}
+            region={region}
+            subRegion={subRegion}
+            lastErruption={lastErruption}
+            summit={summit}
+            elevation={elevation}
+            latitude={latitude}
+            longitude={longitude}
+          />
+        </section>
+        <div className="col-lg-4">
           {isLoggedIn ? (
             <div>
               <h1 className="text-center mt-5">Population Density</h1>
@@ -85,7 +89,7 @@ function VolcanoDetails({
 }) {
   if (isLoggedIn) {
     return (
-      <div className="col-sm-1 text-center">
+      <div className="text-center">
         <p className="fs-6">
           <strong>Country:</strong> {country}
         </p>

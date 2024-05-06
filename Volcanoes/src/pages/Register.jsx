@@ -16,7 +16,16 @@ export default function Register() {
   const [accountRegisterError, setAccountRegisterError] = useState(false);
   const [accountCreation, setAccountCreation] = useState(false);
 
+  function resetStates() {
+    setEmailError(null);
+    setPasswordError(null);
+    setAccountRegisterError(false);
+    setAccountAlreadyRegistered(false);
+  }
+
   function register() {
+    resetStates();
+
     const endPoint = `${API_URL}/user/register`;
 
     return fetch(endPoint, {
@@ -32,13 +41,16 @@ export default function Register() {
       .then((res) => {
         if (res.status === 400) {
           setAccountRegisterError(true);
+          console.log(res);
           throw new Error("Both email and password are required");
         }
         if (res.status === 409) {
           setAccountAlreadyRegistered(true);
+          console.log(res);
           throw new Error("User already exists");
         }
         if (res.ok) {
+          console.log(res);
           setAccountCreation(true);
         }
       })
@@ -62,7 +74,7 @@ export default function Register() {
   function validatePassword(e) {
     const { value } = e.target;
     const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (regex.test(value) || value == "") {
       setPasswordError(null);
@@ -102,16 +114,17 @@ export default function Register() {
             >
               Register
             </button>
+            {accountRegisterError ? (
+              <Message message={"Both email and password are required"} />
+            ) : accountAlreadyRegistered ? (
+              <Message message={"Account already exists"} />
+            ) : accountCreation ? (
+              <Message message={"Account has been successfully created!"} />
+            ) : null}
           </div>
         </div>
       </div>
-      {accountRegisterError ? (
-        <Message message={"Both email and password are required"} />
-      ) : accountAlreadyRegistered ? (
-        <Message message={"Account already exists"} />
-      ) : accountCreation ? (
-        <Message message={"Account has been successfully created!"} />
-      ) : null}
+
       <Footer />
     </div>
   );
@@ -176,5 +189,7 @@ function Message({ message }) {
     }, 5000);
     return () => clearTimeout(displayTimer);
   }, [message]);
-  return messageVisible ? <h2 className="text-center">{message}</h2> : null;
+  return messageVisible ? (
+    <p className="text-center fs-5 mt-2"> {message}</p>
+  ) : null;
 }

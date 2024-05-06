@@ -23,18 +23,11 @@ export default function Home({ isLoggedIn }) {
           </Link>
         </h2>
         <div className="row mt-5">
-          <div className="col-md-6">
+          <div>
             <img
               src="../../src/images/volcano.jpeg"
-              className="img-fluid w-100 mt-5"
+              className="img-fluid  mt-5"
               alt="Image of volcano"
-            />
-          </div>
-          <div className="col-md-6">
-            <img
-              src="../../src/images/volcanoTwo.jpeg"
-              className="img-fluid w-100 mt-5"
-              alt="Another volcano image"
             />
           </div>
         </div>

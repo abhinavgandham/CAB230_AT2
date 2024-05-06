@@ -89,49 +89,20 @@ export default function Login() {
       >
         <div className="border border-danger border-5 rounded shadow p-4">
           <h1 className="text-center">Login</h1>
-          <div className="form-group d-flex flex-column align-items-center">
-            <label className="mt-5">Email</label>
-            <input
-              type="email"
-              className="form-control-lg w-30 mt-2"
-              placeholder="username@example.com"
-              value={email}
-              onChange={validateEmail}
-              onBlur={() => {
-                setEmailEntered(true);
-              }}
-              onFocus={() => {
-                setEmailEntered();
-              }}
-            />
-            {emailEntered ? <>{emailError}</> : null}
-            <label className="mt-5">Password</label>
-            <input
-              type="password"
-              className="form-control-lg w-30 mt-2"
-              required
-              minLength={8}
-              placeholder="*********"
-              value={password}
-              onChange={validatePassword}
-              onBlur={() => {
-                setPasswordEntered(true);
-              }}
-              onFocus={() => {
-                setPasswordEntered(null);
-              }}
-            />
-            {passwordEntered && passwordError ? (
-              <p>Error: {passwordError}</p>
-            ) : null}
-            <button
-              type="submit"
-              className="btn btn-danger mt-5"
-              onClick={login}
-            >
-              Login
-            </button>
-          </div>
+          <EmailandPasswordInput
+            email={email}
+            validateEmail={validateEmail}
+            setEmailEntered={setEmailEntered}
+            emailEntered={emailEntered}
+            emailError={emailError}
+            password={password}
+            validatePassword={validatePassword}
+            setPasswordEntered={setPasswordEntered}
+            passwordEntered={passwordEntered}
+            passwordError={passwordError}
+          />
+          <LoginButton login={login} />
+
           <p className="text-center mt-5">
             Don't have an account?{" "}
             <Link className="text-danger" to={"../pages/Register.jsx"}>
@@ -139,13 +110,73 @@ export default function Login() {
             </Link>
           </p>
         </div>
-        {inCorrect ? (
-          <Message message={"Incorrect email or password"} />
-        ) : passwordError ? (
-          <Message message={"There was an error"} />
-        ) : null}
-        <Footer />
       </div>
+      {inCorrect ? (
+        <Message message={"Incorrect email or password"} />
+      ) : passwordError ? (
+        <Message message={"There was an error"} />
+      ) : null}
+      <Footer />
+    </div>
+  );
+}
+
+function EmailandPasswordInput({
+  email,
+  validateEmail,
+  setEmailEntered,
+  emailEntered,
+  emailError,
+  password,
+  validatePassword,
+  setPasswordEntered,
+  passwordEntered,
+  passwordError,
+}) {
+  return (
+    <div className="form-group d-flex flex-column align-items-center">
+      <label className="mt-5">Email</label>
+      <input
+        type="email"
+        className="form-control-lg w-30 mt-2"
+        placeholder="username@example.com"
+        value={email}
+        onChange={validateEmail}
+        onBlur={() => {
+          setEmailEntered(true);
+        }}
+        onFocus={() => {
+          setEmailEntered();
+        }}
+      />
+      {emailEntered ? <>{emailError}</> : null}
+      <label className="mt-5">Password</label>
+      <input
+        type="password"
+        className="form-control-lg w-30 mt-2"
+        required
+        minLength={8}
+        placeholder="*********"
+        value={password}
+        onChange={validatePassword}
+        onBlur={() => {
+          setPasswordEntered(true);
+        }}
+        onFocus={() => {
+          setPasswordEntered(null);
+        }}
+      />
+      {passwordEntered ? <>{passwordError}</> : null}
+    </div>
+  );
+}
+
+function LoginButton({ login }) {
+  return (
+    <div className="text-center">
+      <button type="submit" className="btn btn-danger mt-5" onClick={login}>
+        Login
+      </button>
     </div>
   );
 }

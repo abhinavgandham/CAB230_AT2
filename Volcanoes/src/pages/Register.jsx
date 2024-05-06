@@ -68,7 +68,7 @@ export default function Register() {
       setPasswordError(null);
     } else {
       setPasswordError(
-        "Password is not in correct format, either password length is greater than 12 characters or some characters are invalid."
+        "Password must contain 8 characters with mix of uppercase, lowercase, numbers, and special characters, avoiding common words or patterns."
       );
     }
     setPassword(value);
@@ -88,6 +88,8 @@ export default function Register() {
             <input
               type="email"
               className="form-control-lg w-30 flex-row "
+              required
+              minLength={8}
               value={email}
               onChange={validateEmail}
               onBlur={() => {
@@ -102,6 +104,8 @@ export default function Register() {
             <input
               type="password"
               className="form-control-lg w-30 "
+              required
+              minLength={8}
               onChange={validatePassword}
               onBlur={() => {
                 setPasswordEntered(true);

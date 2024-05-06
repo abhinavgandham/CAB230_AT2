@@ -10,7 +10,6 @@ import NavBarLoggedIn from "../components/NavBarLoggedIn";
 
 // eslint-disable-next-line react/prop-types
 export default function VolcanoList({ isLoggedIn, token }) {
-  console.log("VolcanoList", isLoggedIn);
   const [listData, setListData] = useState([]);
   const [country, setCountry] = useState("");
   const [population, setPopulation] = useState("");

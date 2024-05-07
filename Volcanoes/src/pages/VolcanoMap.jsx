@@ -27,10 +27,13 @@ export default function VolcanoMap({ isLoggedIn }) {
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
-      <h1 className="text-center mt-5">{name}</h1>
+      <h1 className="mt-3 text-center">
+        Volcano Name: {""}
+        <strong>{name}</strong>
+      </h1>
       <div>
         <Link
-          className="d-flex align-items-center mb-3"
+          className="d-flex align-items-center mb-3 text-danger"
           to={"../pages/VolcanoList.jsx"}
         >
           <img src={arrow} width={30} className="mr-2" alt="Back arrow"></img>
@@ -45,6 +48,7 @@ export default function VolcanoMap({ isLoggedIn }) {
               : "col-lg-5 col-md-12 p-4 border border-danger bg-dark shadow"
           }
         >
+          <h2 className="text-light text-center">Volcano Location</h2>
           <Map
             center={center}
             zoom={6}
@@ -55,12 +59,9 @@ export default function VolcanoMap({ isLoggedIn }) {
           </Map>
         </section>
         <section
-          className={
-            isLoggedIn
-              ? "col-lg-4 border border-danger bg-dark shadow text-light"
-              : null
-          }
+          className={"col-lg-4 border border-danger bg-dark shadow text-light"}
         >
+          <h2 className="text-light text-center mt-4">Volcano Details</h2>
           <VolcanoDetails
             isLoggedIn={isLoggedIn}
             country={country}
@@ -129,7 +130,7 @@ function VolcanoDetails({
     );
   } else {
     return (
-      <div className="col-md-12 mt-3">
+      <div className="col-md-12 mt-5">
         <h2 className="text-center mb-3">
           <strong>Country:</strong> {country}
         </h2>

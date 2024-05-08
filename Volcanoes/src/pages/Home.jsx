@@ -10,16 +10,13 @@ export default function Home({ isLoggedIn }) {
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
       <section className="container-fluid">
-        <h1 className="display-5 mt-2 bg-light fw-bold text-center">
-          Welcome to Volcano Sight
-        </h1>
-        <div className="row">
-          <div className="col-md-6">
-            <section
-              className="border border-danger shadow p-5 mt-5 bg-dark text-light"
-              style={{ height: "90%" }}
-            >
-              <h5 className="p-5  mt-5 text-center">
+        <div className="row mt-5">
+          <div className="col-lg-6 d-flex align-items-center justify-content-center">
+            <div className="text-center">
+              <h1 className="display-5 mt-2 fw-bold">
+                Welcome to Volcano Sight
+              </h1>
+              <p className="p-5 mt-5">
                 Discover the world's volcanoes with Volcano Sight. Explore
                 fascinating information about volcanoes across different
                 countries, all in one place. Whether you're an adventurer or a
@@ -27,18 +24,16 @@ export default function Home({ isLoggedIn }) {
                 <Link className="text-danger" to={"../pages/VolcanoList.jsx"}>
                   here
                 </Link>
-              </h5>
-            </section>
-          </div>
-
-          <div className="col-md-6">
-            <div>
-              <img
-                src="../../src/images/volcano.jpeg"
-                className="img-fluid  w-100 mt-5"
-                alt="Image of volcano"
-              />
+              </p>
             </div>
+          </div>
+          <div className="col-lg-6 d-flex align-items-center justify-content-center">
+            <img
+              src="../../src/images/volcano.jpeg"
+              className="img-fluid"
+              style={{ maxHeight: "100%", maxWidth: "100%" }}
+              alt="Image of volcano"
+            />
           </div>
         </div>
       </section>

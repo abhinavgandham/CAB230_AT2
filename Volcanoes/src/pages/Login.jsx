@@ -16,6 +16,7 @@ export default function Login() {
   const [passwordEntered, setPasswordEntered] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [inCorrect, setInCorrect] = useState(null);
+  const [empty, setEmpty] = useState(false);
   const navigate = useNavigate();
 
   function resetStates() {
@@ -25,8 +26,15 @@ export default function Login() {
   }
 
   function login() {
+    setEmpty(false);
     resetStates();
+
     const endPoint = `${API_URL}/user/login`;
+
+    if (email === "" || password === "") {
+      setEmpty(true);
+      throw new Error("Both email and password are required");
+    }
 
     return fetch(endPoint, {
       method: "POST",
@@ -120,6 +128,8 @@ export default function Login() {
             <Message message={"Incorrect email or password"} />
           ) : passwordError ? (
             <Message message={"There was an error"} />
+          ) : empty ? (
+            <Message message={"Both email and password are required"} />
           ) : null}
         </div>
       </div>

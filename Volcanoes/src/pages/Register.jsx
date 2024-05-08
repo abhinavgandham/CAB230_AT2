@@ -74,7 +74,7 @@ export default function Register() {
   function validatePassword(e) {
     const { value } = e.target;
     const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[A-Z])(?=.*[!@#$%^&*()-+=])[a-zA-Z!@#$%^&*()-+=]{5,8}(?:\d.*){0,4}$/;
 
     if (regex.test(value) || value == "") {
       setPasswordError(null);

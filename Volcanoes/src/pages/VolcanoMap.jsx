@@ -94,6 +94,15 @@ export default function VolcanoMap({ isLoggedIn }) {
               <h1 className="text-center mt-5">Population Density</h1>
               <h2 className="text-center mt-5">No Data Found</h2>
             </div>
+          ) : isLoggedIn &&
+            (populations[0] != 0 ||
+              populations[1] != 0 ||
+              populations[2] != 0 ||
+              populations[3] != 0) ? (
+            <div className="border border-danger bg-dark text-light">
+              <h1 className="text-center mt-5">Population Density</h1>
+              <ChartContainer populationData={populations} />
+            </div>
           ) : null}
         </div>
       </div>
@@ -189,6 +198,15 @@ function BarChart({ data }) {
       instanceOfChart.current = new Chart(chartRef.current, {
         type: "pie",
         data: data,
+        options: {
+          plugins: {
+            legend: {
+              labels: {
+                color: "white",
+              },
+            },
+          },
+        },
       });
     }
     return () => {

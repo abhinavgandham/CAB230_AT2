@@ -95,28 +95,26 @@ export default function Register() {
       >
         <div className="border border-danger bg-dark text-light border-5 rounded shadow p-4">
           <h1 className="text-center">Register</h1>
-          <div className="d-flex flex-column align-items-center">
-            <EmailandPassword
-              email={email}
-              validateEmail={validateEmail}
-              setEmailEntered={setEmailEntered}
-              emailEntered={emailEntered}
-              emailError={emailError}
-              validatePassword={validatePassword}
-              setPasswordEntered={setPasswordEntered}
-              passwordEntered={passwordEntered}
-              passwordError={passwordError}
-            />
-            <RegisterButton register={register} />
+          <EmailandPassword
+            email={email}
+            validateEmail={validateEmail}
+            setEmailEntered={setEmailEntered}
+            emailEntered={emailEntered}
+            emailError={emailError}
+            validatePassword={validatePassword}
+            setPasswordEntered={setPasswordEntered}
+            passwordEntered={passwordEntered}
+            passwordError={passwordError}
+          />
+          <RegisterButton register={register} />
 
-            {accountRegisterError ? (
-              <Message message={"Both email and password are required"} />
-            ) : accountAlreadyRegistered ? (
-              <Message message={"Account already exists"} />
-            ) : accountCreation ? (
-              <Message message={"Account has been successfully created!"} />
-            ) : null}
-          </div>
+          {accountRegisterError ? (
+            <Message message={"Both email and password are required"} />
+          ) : accountAlreadyRegistered ? (
+            <Message message={"Account already exists"} />
+          ) : accountCreation ? (
+            <Message message={"Account has been successfully created!"} />
+          ) : null}
         </div>
       </div>
 
@@ -137,11 +135,10 @@ function EmailandPassword({
 }) {
   return (
     <div className="form-group d-flex flex-column align-items-center">
-      <label className="mt-3">Email</label>
+      <label className="mt-5">Email</label>
       <input
         type="email"
-        className="form-control-lg flex-row "
-        style={{ width: "120%" }}
+        className="form-control-lg w-50 mt-2"
         required
         minLength={8}
         placeholder="username@example.com"
@@ -155,11 +152,10 @@ function EmailandPassword({
         }}
       />
       {emailEntered ? <>{emailError}</> : null}
-      <label className="mt-3">Password</label>
+      <label className="mt-5">Password</label>
       <input
         type="password"
-        className="form-control-lg"
-        style={{ width: "120%" }}
+        className="form-control-lg w-50 mt-2"
         required
         minLength={8}
         placeholder="********"
@@ -178,14 +174,15 @@ function EmailandPassword({
 
 function RegisterButton({ register }) {
   return (
-    <button
-      type="submit"
-      className="btn btn-danger mt-4"
-      style={{ width: "40%" }}
-      onClick={register}
-    >
-      Register
-    </button>
+    <div className="text-center">
+      <button
+        type="submit"
+        className="btn btn-danger w-50 mt-5 fs-5"
+        onClick={register}
+      >
+        Register
+      </button>
+    </div>
   );
 }
 

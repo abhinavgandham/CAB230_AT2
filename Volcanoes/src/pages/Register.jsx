@@ -140,7 +140,8 @@ function EmailandPassword({
       <label className="mt-3">Email</label>
       <input
         type="email"
-        className="form-control-lg w-30 flex-row "
+        className="form-control-lg flex-row "
+        style={{ width: "120%" }}
         required
         minLength={8}
         placeholder="username@example.com"
@@ -157,7 +158,8 @@ function EmailandPassword({
       <label className="mt-3">Password</label>
       <input
         type="password"
-        className="form-control-lg w-30"
+        className="form-control-lg"
+        style={{ width: "120%" }}
         required
         minLength={8}
         placeholder="********"
@@ -179,7 +181,7 @@ function RegisterButton({ register }) {
     <button
       type="submit"
       className="btn btn-danger mt-4"
-      style={{ width: "35%" }}
+      style={{ width: "40%" }}
       onClick={register}
     >
       Register

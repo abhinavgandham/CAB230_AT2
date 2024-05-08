@@ -50,12 +50,7 @@ export default function VolcanoMap({ isLoggedIn }) {
           }
         >
           <h2 className="text-light text-center">Volcano Location</h2>
-          <Map
-            center={center}
-            zoom={6}
-            height={500}
-            width={isLoggedIn ? 450 : 570}
-          >
+          <Map center={center} zoom={6} height={500} width="100%">
             <Marker anchor={center} />
           </Map>
         </section>

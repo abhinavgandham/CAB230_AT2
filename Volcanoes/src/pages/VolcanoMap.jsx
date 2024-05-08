@@ -24,6 +24,7 @@ export default function VolcanoMap({ isLoggedIn }) {
   const elevation = location.state.elevation;
   const populations = location.state.populations;
   const center = [latitude, longitude];
+  console.log(populations);
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
@@ -75,10 +76,23 @@ export default function VolcanoMap({ isLoggedIn }) {
           />
         </section>
         <div className="col-lg-4">
-          {isLoggedIn ? (
+          {isLoggedIn &&
+          populations[0] != 0 &&
+          populations[1] != 0 &&
+          populations[2] != 0 &&
+          populations[3] != 0 ? (
             <div className="border border-danger bg-dark text-light">
               <h1 className="text-center mt-5">Population Density</h1>
               <ChartContainer populationData={populations} />
+            </div>
+          ) : isLoggedIn &&
+            populations[0] == 0 &&
+            populations[1] == 0 &&
+            populations[2] == 0 &&
+            populations[3] == 0 ? (
+            <div className="border border-danger bg-dark text-light">
+              <h1 className="text-center mt-5">Population Density</h1>
+              <h2 className="text-center mt-5">No Data Found</h2>
             </div>
           ) : null}
         </div>

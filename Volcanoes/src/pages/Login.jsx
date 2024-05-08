@@ -48,7 +48,6 @@ export default function Login() {
     })
       .then((res) => {
         if (!res.ok) {
-          console.log(res);
           setInCorrect("Incorrect email or password");
           throw new Error("Incorrect email or password");
         }
@@ -57,7 +56,6 @@ export default function Login() {
       .then((data) => {
         const token = data.token;
         localStorage.setItem("token", token);
-
         navigate("/");
         const refresh = setTimeout(() => {
           window.location.reload();

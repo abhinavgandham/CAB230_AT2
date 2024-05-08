@@ -9,12 +9,18 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function App() {
+  function handleTokenExpiration() {
+    const expiration = localStorage.getItem("Expiration");
+    console.log(expiration);
+  }
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log(token);
+    handleTokenExpiration();
     setToken(token);
     setIsLoggedIn(token);
   }, []);

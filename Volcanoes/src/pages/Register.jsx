@@ -178,7 +178,8 @@ function RegisterButton({ register }) {
   return (
     <button
       type="submit"
-      className="btn btn-danger mt-4 w-50"
+      className="btn btn-danger mt-4"
+      style={{ width: "35%" }}
       onClick={register}
     >
       Register

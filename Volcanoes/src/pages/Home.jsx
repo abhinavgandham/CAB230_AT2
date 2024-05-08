@@ -15,8 +15,11 @@ export default function Home({ isLoggedIn }) {
         </h1>
         <div className="row">
           <div className="col-md-6">
-            <section className="border border-danger shadow p-5 mt-5 bg-dark text-light">
-              <h5 className="p-5">
+            <section
+              className="border border-danger shadow p-5 mt-5 bg-dark text-light"
+              style={{ height: "90%" }}
+            >
+              <h5 className="p-5  mt-5 text-center">
                 Discover the world's volcanoes with Volcano Sight. Explore
                 fascinating information about volcanoes across different
                 countries, all in one place. Whether you're an adventurer or a

@@ -19,19 +19,19 @@ export default function VolcanoList({ isLoggedIn, token }) {
   const [rowData, setRowData] = useState([]);
   const navigate = useNavigate();
 
-  function displaySelectedData(e) {
+  const displaySelectedData = (e) => {
     const selectedCountry = e.target.value;
     setCountry(selectedCountry);
     localStorage.setItem("selectedCountry", selectedCountry);
-  }
+  };
 
-  function findViaPopulation(e) {
+  const findViaPopulation = (e) => {
     const selectedPopulation = e.target.value;
     setPopulation(selectedPopulation);
     localStorage.setItem("selectedPopulation", selectedPopulation);
-  }
+  };
 
-  function isLoggedInResponse(
+  const isLoggedInResponse = (
     selectedId,
     targetLatitude,
     targetLongitude,
@@ -43,7 +43,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
     summit,
     elevation,
     populations
-  ) {
+  ) => {
     return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`, {
       method: "GET",
       headers: {
@@ -88,9 +88,9 @@ export default function VolcanoList({ isLoggedIn, token }) {
           });
         });
     });
-  }
+  };
 
-  function notLoggedInResponse(
+  const notLoggedInResponse = (
     selectedId,
     targetLatitude,
     targetLongitude,
@@ -101,7 +101,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
     lastErruption,
     summit,
     elevation
-  ) {
+  ) => {
     return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`).then(
       (res) => {
         res
@@ -135,7 +135,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
           });
       }
     );
-  }
+  };
 
   function countryId(e) {
     const selectedId = e.node.data.id;

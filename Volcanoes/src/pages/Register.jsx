@@ -96,8 +96,8 @@ export default function Register() {
               type="password"
               className="form-control-lg w-50 mt-2"
               required
-              minLength={5} // Adjusted minimum length
-              maxLength={8} // Adjusted maximum length
+              minLength={5}
+              maxLength={8}
               placeholder="********"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

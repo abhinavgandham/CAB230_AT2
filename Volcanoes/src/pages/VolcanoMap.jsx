@@ -1,29 +1,40 @@
 /* eslint-disable react/prop-types */
 import { Map, Marker } from "pigeon-maps";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 import NavBar from "../components/NavBar";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 import Chart from "chart.js/auto";
 import arrow from "../images/arrow.png";
 
-// eslint-disable-next-line react/prop-types
+// ------The VolcanoMap page---------------
 export default function VolcanoMap({ isLoggedIn }) {
   const location = useLocation();
+  // Getting the latitude
   const latitude = location.state.targetLatitude;
+  // Getting the longitude
   const longitude = location.state.targetLongitude;
+  // Getting the volcano name
   const name = location.state.name;
+  // Getting the country
   const country = location.state.country;
+  // Getting the region
   const region = location.state.region;
+  // Getting the sub region
   const subRegion = location.state.subRegion;
+  // Getting the last Erruption date
   const lastErruption = location.state.lastErruption;
+  // Getting the summit
   const summit = location.state.summit;
+  // Getting the elevation
   const elevation = location.state.elevation;
+  // Getting the population densities
   const populations = location.state.populations;
+  // Extracting the center point of the map using the latitude and longitude
   const center = [latitude, longitude];
+
+  // Returning the JSX for the volcano map
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
@@ -96,6 +107,7 @@ export default function VolcanoMap({ isLoggedIn }) {
   );
 }
 
+// The Volcano Details Component
 function VolcanoDetails({
   isLoggedIn,
   country,
@@ -107,6 +119,7 @@ function VolcanoDetails({
   latitude,
   longitude,
 }) {
+  // Returning the following JSX if the user is logged in
   if (isLoggedIn) {
     return (
       <div className="text-center mt-5">
@@ -138,6 +151,7 @@ function VolcanoDetails({
       </div>
     );
   } else {
+    // Returning the following JSX if the user is not logged in
     return (
       <div className="col-md-12 mt-5">
         <h2 className="text-center mb-3">
@@ -170,8 +184,8 @@ function VolcanoDetails({
   }
 }
 
-// eslint-disable-next-line react/prop-types
-function BarChart({ data }) {
+// The logic for handling the pie chart
+function PieChart({ data }) {
   const chartRef = useRef(null);
   const instanceOfChart = useRef(null);
 
@@ -211,6 +225,7 @@ function BarChart({ data }) {
   );
 }
 
+// The chart component
 function ChartContainer({ populationData }) {
   const data = {
     labels: ["5km", "10km", "30km", "100km"],
@@ -227,7 +242,7 @@ function ChartContainer({ populationData }) {
 
   return (
     <div className="chart-container">
-      <BarChart data={data} />
+      <PieChart data={data} />
     </div>
   );
 }

@@ -37,7 +37,8 @@ export default function Login() {
     // reseting all error states
     resetErrors();
 
-    const endpoint = `${API_URL}/user/login2`;
+    // The target endpoint
+    const endpoint = `${API_URL}/user/login`;
 
     try {
       // Fetching the endpoint

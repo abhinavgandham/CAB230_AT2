@@ -164,7 +164,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
-      <div className="container mt-5">
+      <div className="container">
         <div
           className="ag-theme-balham-dark justify-content-center mx-auto"
           style={{
@@ -186,7 +186,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
           </div>
 
           <AgGridReact
-            className="table-responsive mt-5"
+            className="table-responsive"
             columnDefs={columns}
             rowData={rowData}
             pagination={true}
@@ -205,33 +205,43 @@ export default function VolcanoList({ isLoggedIn, token }) {
 
 function CountrySelect({ targetCountry, dataSet, displayData }) {
   return (
-    <select
-      className="form-select mb-2"
-      aria-label="select country"
-      value={targetCountry}
-      onChange={displayData}
-    >
-      <option>Country</option>
-      {dataSet.map((country) => {
-        return (
-          <option key={country} value={country}>
-            {country}
-          </option>
-        );
-      })}
-    </select>
+    <div>
+      <label htmlFor="Country" className="text-dark p-2 fs-6">
+        Select Country
+      </label>
+      <select
+        className="form-select mb-2"
+        aria-label="select country"
+        value={targetCountry}
+        onChange={displayData}
+      >
+        <option>Country</option>
+        {dataSet.map((country) => {
+          return (
+            <option key={country} value={country}>
+              {country}
+            </option>
+          );
+        })}
+      </select>
+    </div>
   );
 }
 
 function PopulationSelect({ findWithPopulation }) {
   return (
-    <select className="form-select mb-2" onChange={findWithPopulation}>
-      <option>Populated Within</option>
-      <option value={"5km"}>5km</option>
-      <option value={"10km"}>10km</option>
-      <option value={"30km"}>30km</option>
-      <option value={"100km"}>100km</option>
-    </select>
+    <div>
+      <label htmlFor="Population" className="text-dark p-2 fs-6">
+        Select Population
+      </label>
+      <select className="form-select mb-2" onChange={findWithPopulation}>
+        <option>Populated Within</option>
+        <option value={"5km"}>5km</option>
+        <option value={"10km"}>10km</option>
+        <option value={"30km"}>30km</option>
+        <option value={"100km"}>100km</option>
+      </select>
+    </div>
   );
 }
 

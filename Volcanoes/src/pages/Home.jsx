@@ -20,7 +20,7 @@ export default function Home({ isLoggedIn }) {
               <h1 className="display-5 mt-2 fw-bold">
                 Welcome to Volcano Sight
               </h1>
-              <p className="p-5 mt-5">
+              <p className="p-5 mt-5 fs-5">
                 Discover the world's volcanoes with Volcano Sight. Explore
                 fascinating information about volcanoes across different
                 countries, all in one place. Whether you're an adventurer or a

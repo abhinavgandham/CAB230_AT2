@@ -49,6 +49,7 @@ export default function Login() {
       const { token } = data;
       const { expires_in } = data;
       localStorage.setItem("token", token);
+      localStorage.setItem("expires_in", expires_in);
       console.log(expires_in);
 
       navigate("/");
@@ -69,7 +70,6 @@ export default function Login() {
   };
 
   const validatePassword = (value) => {
-    // const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,8}$/;
     setPasswordError(""); // Reset password error when typing
     if (value.length < 5 || value.length > 8) {
       setPasswordError("Password should be 5-8 characters long");
@@ -129,7 +129,7 @@ export default function Login() {
             </Link>
           </p>
           {incorrectError && (
-            <p className="text-danger mt-2">{incorrectError}</p>
+            <p className="text-danger text-center mt-2">{incorrectError}</p>
           )}
         </div>
       </div>

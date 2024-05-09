@@ -14,9 +14,17 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const expiration = localStorage.getItem("expires_in");
+    const expirationTime = Number(expiration) * 1000;
+    console.log(expiration);
     console.log(token);
     setToken(token);
     setIsLoggedIn(token);
+    const expirationTimeOut = setTimeout(() => {
+      setIsLoggedIn(false);
+      localStorage.clear();
+    }, expirationTime);
+    return () => clearTimeout(expirationTimeOut);
   }, []);
 
   return (

@@ -31,26 +31,79 @@ export default function VolcanoList({ isLoggedIn, token }) {
     localStorage.setItem("selectedPopulation", selectedPopulation);
   }
 
-  function countryId(e) {
-    const selectedId = e.node.data.id;
-    let targetLatitude;
-    let targetLongitude;
-    let name;
-    let country;
-    let region;
-    let subRegion;
-    let lastErruption;
-    let summit;
-    let elevation;
-    let populations;
-    if (isLoggedIn) {
-      return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }).then((res) => {
+  function isLoggedInResponse(
+    selectedId,
+    targetLatitude,
+    targetLongitude,
+    name,
+    country,
+    region,
+    subRegion,
+    lastErruption,
+    summit,
+    elevation,
+    populations
+  ) {
+    return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      res
+        .json()
+        .then((data) => {
+          targetLatitude = Number(data.latitude);
+          targetLongitude = Number(data.longitude);
+          name = data.name;
+          country = data.country;
+          region = data.region;
+          subRegion = data.subregion;
+          lastErruption = data.last_eruption;
+          summit = data.summit;
+          elevation = data.elevation;
+          populations = [
+            data.population_5km,
+            data.population_10km,
+            data.population_30km,
+            data.population_100km,
+          ];
+        })
+        .then(() => {
+          navigate("../pages/VolcanoMap.jsx", {
+            state: {
+              id: selectedId,
+              targetLatitude: targetLatitude,
+              targetLongitude: targetLongitude,
+              name: name,
+              country: country,
+              region: region,
+              subRegion: subRegion,
+              lastErruption: lastErruption,
+              summit: summit,
+              elevation: elevation,
+              populations: populations,
+            },
+          });
+        });
+    });
+  }
+
+  function notLoggedInResponse(
+    selectedId,
+    targetLatitude,
+    targetLongitude,
+    name,
+    country,
+    region,
+    subRegion,
+    lastErruption,
+    summit,
+    elevation
+  ) {
+    return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`).then(
+      (res) => {
         res
           .json()
           .then((data) => {
@@ -63,12 +116,6 @@ export default function VolcanoList({ isLoggedIn, token }) {
             lastErruption = data.last_eruption;
             summit = data.summit;
             elevation = data.elevation;
-            populations = [
-              data.population_5km,
-              data.population_10km,
-              data.population_30km,
-              data.population_100km,
-            ];
           })
           .then(() => {
             navigate("../pages/VolcanoMap.jsx", {
@@ -83,44 +130,51 @@ export default function VolcanoList({ isLoggedIn, token }) {
                 lastErruption: lastErruption,
                 summit: summit,
                 elevation: elevation,
-                populations: populations,
               },
             });
           });
-      });
+      }
+    );
+  }
+
+  function countryId(e) {
+    const selectedId = e.node.data.id;
+    let targetLatitude;
+    let targetLongitude;
+    let name;
+    let country;
+    let region;
+    let subRegion;
+    let lastErruption;
+    let summit;
+    let elevation;
+    let populations;
+    if (isLoggedIn) {
+      isLoggedInResponse(
+        selectedId,
+        targetLatitude,
+        targetLongitude,
+        name,
+        country,
+        region,
+        subRegion,
+        lastErruption,
+        summit,
+        elevation,
+        populations
+      );
     } else {
-      return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`).then(
-        (res) => {
-          res
-            .json()
-            .then((data) => {
-              targetLatitude = Number(data.latitude);
-              targetLongitude = Number(data.longitude);
-              name = data.name;
-              country = data.country;
-              region = data.region;
-              subRegion = data.subregion;
-              lastErruption = data.last_eruption;
-              summit = data.summit;
-              elevation = data.elevation;
-            })
-            .then(() => {
-              navigate("../pages/VolcanoMap.jsx", {
-                state: {
-                  id: selectedId,
-                  targetLatitude: targetLatitude,
-                  targetLongitude: targetLongitude,
-                  name: name,
-                  country: country,
-                  region: region,
-                  subRegion: subRegion,
-                  lastErruption: lastErruption,
-                  summit: summit,
-                  elevation: elevation,
-                },
-              });
-            });
-        }
+      notLoggedInResponse(
+        selectedId,
+        targetLatitude,
+        targetLongitude,
+        name,
+        country,
+        region,
+        subRegion,
+        lastErruption,
+        summit,
+        elevation
       );
     }
   }

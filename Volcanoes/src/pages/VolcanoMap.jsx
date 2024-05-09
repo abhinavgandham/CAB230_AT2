@@ -24,7 +24,6 @@ export default function VolcanoMap({ isLoggedIn }) {
   const elevation = location.state.elevation;
   const populations = location.state.populations;
   const center = [latitude, longitude];
-  console.log(populations);
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}

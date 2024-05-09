@@ -37,7 +37,7 @@ export default function Login() {
     // reseting all error states
     resetErrors();
 
-    const endpoint = `${API_URL}/user/login`;
+    const endpoint = `${API_URL}/user/login2`;
 
     try {
       // Fetching the endpoint
@@ -119,40 +119,16 @@ export default function Login() {
       >
         <div className="border border-danger bg-dark text-light border-5 rounded shadow p-4">
           <h1 className="text-center">Login</h1>
-          <div className="form-group d-flex flex-column align-items-center">
-            <label className="mt-5">Email</label>
-            <input
-              type="email"
-              className="form-control-lg w-50 mt-2"
-              placeholder="username@example.com"
-              value={email}
-              onChange={(e) => validateEmail(e.target.value)}
-            />
-            {emailError && <p className="text-danger mt-2">{emailError}</p>}
-            <label className="mt-5">Password</label>
-            <input
-              type="password"
-              className="form-control-lg w-50 mt-2"
-              required
-              placeholder="*********"
-              minLength={5}
-              maxLength={8}
-              value={password}
-              onChange={(e) => validatePassword(e.target.value)}
-            />
-            {passwordError && (
-              <p className="text-danger mt-2">{passwordError}</p>
-            )}
-          </div>
-          <div className="text-center">
-            <button
-              type="submit"
-              className="btn btn-danger w-50 mt-5 fs-5"
-              onClick={handleLogin}
-            >
-              Login
-            </button>
-          </div>
+          <EmailAndPasswordInput
+            email={email}
+            password={password}
+            validateEmail={validateEmail}
+            emailError={emailError}
+            validatePassword={validatePassword}
+            passwordError={passwordError}
+          />
+          <LoginButton handleLogin={handleLogin} />
+
           <p className="text-center mt-3">
             Don't have an account?{" "}
             <Link className="text-danger" to="../pages/Register.jsx">
@@ -165,6 +141,55 @@ export default function Login() {
         </div>
       </div>
       <Footer />
+    </div>
+  );
+}
+
+function EmailAndPasswordInput({
+  email,
+  password,
+  validateEmail,
+  emailError,
+  validatePassword,
+  passwordError,
+}) {
+  return (
+    <div className="form-group d-flex flex-column align-items-center">
+      <label className="mt-5">Email</label>
+      <input
+        type="email"
+        className="form-control-lg w-50 mt-2"
+        placeholder="username@example.com"
+        value={email}
+        onChange={(e) => validateEmail(e.target.value)}
+      />
+      {emailError && <p className="text-danger mt-2">{emailError}</p>}
+      <label className="mt-5">Password</label>
+      <input
+        type="password"
+        className="form-control-lg w-50 mt-2"
+        required
+        placeholder="*********"
+        minLength={5}
+        maxLength={8}
+        value={password}
+        onChange={(e) => validatePassword(e.target.value)}
+      />
+      {passwordError && <p className="text-danger mt-2">{passwordError}</p>}
+    </div>
+  );
+}
+
+function LoginButton({ handleLogin }) {
+  return (
+    <div className="text-center">
+      <button
+        type="submit"
+        className="btn btn-danger w-50 mt-5 fs-5"
+        onClick={handleLogin}
+      >
+        Login
+      </button>
     </div>
   );
 }

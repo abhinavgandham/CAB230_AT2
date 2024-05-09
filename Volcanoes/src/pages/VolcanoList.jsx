@@ -8,29 +8,27 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 
-// ------The Volcano List Page---------
 export default function VolcanoList({ isLoggedIn, token }) {
-  // Setting state for the data in the country select
   const [listData, setListData] = useState([]);
-
-  // Setting state for the chosen country
-  const [country, setCountry] = useState("");
-
-  // Setting state for the chosen population
-  const [population, setPopulation] = useState("");
-
-  // Setting state for the table row data
+  const [country, setCountry] = useState(
+    localStorage.getItem("selectedCountry") || ""
+  );
+  const [population, setPopulation] = useState(
+    localStorage.getItem("selectedPopulation") || ""
+  );
   const [rowData, setRowData] = useState([]);
-
   const navigate = useNavigate();
 
-  // Function for displaying the selected country data in the table
   function displaySelectedData(e) {
-    setCountry(e.target.value);
+    const selectedCountry = e.target.value;
+    setCountry(selectedCountry);
+    localStorage.setItem("selectedCountry", selectedCountry);
   }
-  // Function for finding data via country and population
+
   function findViaPopulation(e) {
-    setPopulation(e.target.value);
+    const selectedPopulation = e.target.value;
+    setPopulation(selectedPopulation);
+    localStorage.setItem("selectedPopulation", selectedPopulation);
   }
 
   function countryId(e) {
@@ -127,14 +125,12 @@ export default function VolcanoList({ isLoggedIn, token }) {
     }
   }
 
-  // The columns for the table
   const columns = [
     { headerName: "Name", field: "name" },
     { headerName: "Region", field: "region" },
     { headerName: "Subregion", field: "subregion" },
   ];
 
-  // Populating the country select when page is rendered
   useEffect(() => {
     fetch("http://4.237.58.241:3000/countries")
       .then((res) => res.json())
@@ -143,17 +139,20 @@ export default function VolcanoList({ isLoggedIn, token }) {
       });
   }, []);
 
-  // displaying the row data for the selected country
   useEffect(() => {
-    if (country != "")
+    if (country !== "") {
       fetch(`http://4.237.58.241:3000/volcanoes?country=${country}`)
         .then((res) => res.json())
         .then((data) => setRowData(data));
+    }
   }, [country]);
 
-  // Displaying the row data based on selected country and population
   useEffect(() => {
-    if (country != "" && population != "" && population != "Populated Within") {
+    if (
+      country !== "" &&
+      population !== "" &&
+      population !== "Populated Within"
+    ) {
       fetch(
         `http://4.237.58.241:3000/volcanoes?country=${country}&populatedWithin=${population}`
       )
@@ -162,7 +161,6 @@ export default function VolcanoList({ isLoggedIn, token }) {
     }
   }, [country, population]);
 
-  // Returning the JSX for volcano list page
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
@@ -182,10 +180,11 @@ export default function VolcanoList({ isLoggedIn, token }) {
               />
             </div>
           </div>
-          s
+
           <div className="col-sm-12 mb-2">
             <PopulationSelect findWithPopulation={findViaPopulation} />
           </div>
+
           <AgGridReact
             className="table-responsive mt-5"
             columnDefs={columns}

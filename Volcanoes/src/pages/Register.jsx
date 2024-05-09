@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
@@ -11,13 +12,6 @@ export default function Register() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setFeedbackMessage("");
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, [feedbackMessage]);
 
   const resetErrors = () => {
     setEmailError("");
@@ -122,7 +116,12 @@ export default function Register() {
             </button>
           </div>
           {feedbackMessage && (
-            <p className="text-center fs-5 mt-2">{feedbackMessage}</p>
+            <p className="text-center fs-5 mt-2">
+              {feedbackMessage} {""}
+              <Link className="text-danger" to={"../pages/Login.jsx"}>
+                Login
+              </Link>
+            </p>
           )}
         </div>
       </div>

@@ -1,14 +1,18 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
+
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 import { Link } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
+//--------The Home Page---------------------
 export default function Home({ isLoggedIn }) {
   return (
     <div>
+      {/* Rendering a different Nav Bar depending on if the user is logged in  */}
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
+      {/* The content of the home page */}
       <section className="container-fluid">
         <div className="row mt-5">
           <div className="col-lg-6 d-flex align-items-center justify-content-center">

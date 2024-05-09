@@ -22,10 +22,6 @@ function App() {
     // Getting the token expiration from localStorage
     const expiration = localStorage.getItem("expires_in");
 
-    // getting the exipration time
-    const expirationTime = expiration * 1000;
-    console.log(token);
-
     // Setting the token depending on if the user has one
     setToken(token);
 
@@ -39,8 +35,10 @@ function App() {
 
       // Clearing the user's local storage
       localStorage.clear();
-    }, expirationTime);
-    return () => clearTimeout(expirationTimeOut);
+    }, Number(expiration) * 1000);
+    return () => {
+      clearTimeout(expirationTimeOut);
+    };
   }, []);
   // Returning the App JSX
   return (

@@ -8,20 +8,31 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 
-// eslint-disable-next-line react/prop-types
+// ------The Volcano List Page---------
 export default function VolcanoList({ isLoggedIn, token }) {
+  // Setting state for the data in the country select
   const [listData, setListData] = useState([]);
+
+  // Setting state for the chosen country
   const [country, setCountry] = useState("");
+
+  // Setting state for the chosen population
   const [population, setPopulation] = useState("");
+
+  // Setting state for the table row data
   const [rowData, setRowData] = useState([]);
+
   const navigate = useNavigate();
 
+  // Function for displaying the selected country data in the table
   function displaySelectedData(e) {
     setCountry(e.target.value);
   }
+  // Function for finding data via country and population
   function findViaPopulation(e) {
     setPopulation(e.target.value);
   }
+
   function countryId(e) {
     const selectedId = e.node.data.id;
     let targetLatitude;

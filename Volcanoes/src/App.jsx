@@ -9,25 +9,42 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function App() {
+  // Setting logged in status for the user
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // state for checking if the user has a token
   const [token, setToken] = useState(null);
 
+  // useEffect for handling token and token expiration
   useEffect(() => {
+    // Getting the token from localStorage
     const token = localStorage.getItem("token");
+
+    // Getting the token expiration from localStorage
     const expiration = localStorage.getItem("expires_in");
-    const expirationTime = Number(expiration) * 1000;
-    console.log(expiration);
+
+    // getting the exipration time
+    const expirationTime = expiration * 1000;
     console.log(token);
+
+    // Setting the token depending on if the user has one
     setToken(token);
+
+    // Setting the logged in status based on if the user has a token
     setIsLoggedIn(token);
+
+    // Logic for JWT token expiration
     const expirationTimeOut = setTimeout(() => {
+      // Setting logged in status to logged out
       setIsLoggedIn(false);
+
+      // Clearing the user's local storage
       localStorage.clear();
     }, expirationTime);
     return () => clearTimeout(expirationTimeOut);
   }, []);
-
+  // Returning the App JSX
   return (
+    // Setting up the routes
     <BrowserRouter>
       <div>
         <Routes>

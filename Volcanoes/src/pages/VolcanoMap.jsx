@@ -38,7 +38,7 @@ export default function VolcanoMap({ isLoggedIn }) {
           to={"../pages/VolcanoList.jsx"}
         >
           <img src={arrow} width={30} className="mr-2" alt="Back arrow"></img>
-          <p className="mt-3 text-danger">Go Back</p>
+          <p className="mt-3 text-danger">Back</p>
         </Link>
       </div>
       <div className="row justify-content-center">
@@ -71,20 +71,12 @@ export default function VolcanoMap({ isLoggedIn }) {
           />
         </section>
         <div className="col-lg-4">
-          {isLoggedIn &&
-          populations[0] != 0 &&
-          populations[1] != 0 &&
-          populations[2] != 0 &&
-          populations[3] != 0 ? (
+          {isLoggedIn && populations.every((value) => value != 0) ? (
             <div className="border border-danger bg-dark text-light">
               <h1 className="text-center mt-5">Population Density</h1>
               <ChartContainer populationData={populations} />
             </div>
-          ) : isLoggedIn &&
-            populations[0] == 0 &&
-            populations[1] == 0 &&
-            populations[2] == 0 &&
-            populations[3] == 0 ? (
+          ) : isLoggedIn && populations.every((value) => value === 0) ? (
             <div className="border border-danger bg-dark text-light">
               <h1 className="text-center mt-5">Population Density</h1>
               <h2 className="text-center mt-5">No Data Found</h2>

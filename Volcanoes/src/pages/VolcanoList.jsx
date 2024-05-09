@@ -127,12 +127,14 @@ export default function VolcanoList({ isLoggedIn, token }) {
     }
   }
 
+  // The columns for the table
   const columns = [
     { headerName: "Name", field: "name" },
     { headerName: "Region", field: "region" },
     { headerName: "Subregion", field: "subregion" },
   ];
 
+  // Populating the country select when page is rendered
   useEffect(() => {
     fetch("http://4.237.58.241:3000/countries")
       .then((res) => res.json())
@@ -141,6 +143,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
       });
   }, []);
 
+  // displaying the row data for the selected country
   useEffect(() => {
     if (country != "")
       fetch(`http://4.237.58.241:3000/volcanoes?country=${country}`)
@@ -148,6 +151,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
         .then((data) => setRowData(data));
   }, [country]);
 
+  // Displaying the row data based on selected country and population
   useEffect(() => {
     if (country != "" && population != "" && population != "Populated Within") {
       fetch(
@@ -158,6 +162,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
     }
   }, [country, population]);
 
+  // Returning the JSX for volcano list page
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}

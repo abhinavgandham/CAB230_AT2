@@ -109,7 +109,6 @@ export default function Login() {
     setPassword(value);
   };
 
-
   // Returning the JSX for the login page
   return (
     <div>

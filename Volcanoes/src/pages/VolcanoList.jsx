@@ -184,7 +184,11 @@ export default function VolcanoList({ isLoggedIn, token }) {
           <div className="col-sm-12 mb-2">
             <PopulationSelect findWithPopulation={findViaPopulation} />
           </div>
-
+          <strong>
+            <label htmlFor="Volcanoes" className="text-dark p-2 fs-6">
+              Volcanoes
+            </label>
+          </strong>
           <AgGridReact
             className="table-responsive"
             columnDefs={columns}
@@ -206,9 +210,11 @@ export default function VolcanoList({ isLoggedIn, token }) {
 function CountrySelect({ targetCountry, dataSet, displayData }) {
   return (
     <div>
-      <label htmlFor="Country" className="text-dark p-2 fs-6">
-        Select Country
-      </label>
+      <strong>
+        <label htmlFor="Country" className="text-dark p-2 fs-6">
+          Select Country
+        </label>
+      </strong>
       <select
         className="form-select mb-2"
         aria-label="select country"
@@ -231,9 +237,11 @@ function CountrySelect({ targetCountry, dataSet, displayData }) {
 function PopulationSelect({ findWithPopulation }) {
   return (
     <div>
-      <label htmlFor="Population" className="text-dark p-2 fs-6">
-        Select Population
-      </label>
+      <strong>
+        <label htmlFor="Population" className="text-dark p-2 fs-6">
+          Select Population
+        </label>
+      </strong>
       <select className="form-select mb-2" onChange={findWithPopulation}>
         <option>Populated Within</option>
         <option value={"5km"}>5km</option>

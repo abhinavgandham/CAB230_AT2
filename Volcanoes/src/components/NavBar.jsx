@@ -3,12 +3,14 @@ import { useState } from "react";
 import logo from "../images/logo.jpeg";
 
 export default function NavBar() {
+  // State for managing hamburger menu
   const [isOpen, setIsOpen] = useState(false);
 
+  // function that handles the state
   function toggleNavBar() {
     setIsOpen(!isOpen);
   }
-
+  // The JSX for the nav bar
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">

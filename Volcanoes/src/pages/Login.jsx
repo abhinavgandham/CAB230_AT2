@@ -101,11 +101,11 @@ export default function Login() {
 
   // Function that validates the password
   const validatePassword = (value) => {
-    setPasswordError(""); // Reset password error when typing
+    setPasswordError("");
     if (value.length < 5 || value.length > 8) {
       setPasswordError("Password should be 5-8 characters long");
     } else {
-      setPasswordError(""); // Clear error if password meets criteria
+      setPasswordError("");
     }
     setPassword(value);
   };
@@ -146,6 +146,7 @@ export default function Login() {
   );
 }
 
+// Email and Password Input Component
 function EmailAndPasswordInput({
   email,
   password,
@@ -181,6 +182,7 @@ function EmailAndPasswordInput({
   );
 }
 
+// Login Button Component
 function LoginButton({ handleLogin }) {
   return (
     <div className="text-center">

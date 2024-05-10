@@ -8,29 +8,37 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 import NavBarLoggedIn from "../components/NavBarLoggedIn";
 
+// ---------The Volcano List Page--------------
 export default function VolcanoList({ isLoggedIn, token }) {
+  // Setting state for the list data
   const [listData, setListData] = useState([]);
+  // Setting state for the selected country
   const [country, setCountry] = useState(
     localStorage.getItem("selectedCountry") || ""
   );
+  // Setting state for the selected population distance
   const [population, setPopulation] = useState(
     localStorage.getItem("selectedPopulation") || ""
   );
+  // Setting state for the row data
   const [rowData, setRowData] = useState([]);
   const navigate = useNavigate();
 
+  // function that displayes the data based on the selected country
   const displaySelectedData = (e) => {
     const selectedCountry = e.target.value;
     setCountry(selectedCountry);
     localStorage.setItem("selectedCountry", selectedCountry);
   };
 
+  // function that displays the data based on country and population
   const findViaPopulation = (e) => {
     const selectedPopulation = e.target.value;
     setPopulation(selectedPopulation);
     localStorage.setItem("selectedPopulation", selectedPopulation);
   };
 
+  // The response when a user is logged in and they click a cell in the table
   const isLoggedInResponse = (
     selectedId,
     targetLatitude,
@@ -44,16 +52,19 @@ export default function VolcanoList({ isLoggedIn, token }) {
     elevation,
     populations
   ) => {
+    // fetching the enpoint with the selectedID
     return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        // Providing the user's JWT token in the ehader
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => {
       res
         .json()
         .then((data) => {
+          // setting the required information for the volcano map page
           targetLatitude = Number(data.latitude);
           targetLongitude = Number(data.longitude);
           name = data.name;
@@ -72,6 +83,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
         })
         .then(() => {
           navigate("../pages/VolcanoMap.jsx", {
+            // Sending the information to the volcano map page
             state: {
               id: selectedId,
               targetLatitude: targetLatitude,
@@ -90,6 +102,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
     });
   };
 
+  // The response when a user is not logged in and they click a cell in the table
   const notLoggedInResponse = (
     selectedId,
     targetLatitude,
@@ -102,11 +115,13 @@ export default function VolcanoList({ isLoggedIn, token }) {
     summit,
     elevation
   ) => {
+    // fetching the enpoint with the selectedID
     return fetch(`http://4.237.58.241:3000/volcano/${selectedId}`).then(
       (res) => {
         res
           .json()
           .then((data) => {
+            // setting the required information for the volcano Map page
             targetLatitude = Number(data.latitude);
             targetLongitude = Number(data.longitude);
             name = data.name;
@@ -118,6 +133,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
             elevation = data.elevation;
           })
           .then(() => {
+            // Sending the information to the volcano map page
             navigate("../pages/VolcanoMap.jsx", {
               state: {
                 id: selectedId,
@@ -136,6 +152,9 @@ export default function VolcanoList({ isLoggedIn, token }) {
       }
     );
   };
+
+  // Function for handling when a user clicks on a country in the table
+  // (passing required state to the map component)
 
   function countryId(e) {
     const selectedId = e.node.data.id;
@@ -179,12 +198,14 @@ export default function VolcanoList({ isLoggedIn, token }) {
     }
   }
 
+  // Defining the columns of the table
   const columns = [
     { headerName: "Name", field: "name" },
     { headerName: "Region", field: "region" },
     { headerName: "Subregion", field: "subregion" },
   ];
 
+  // UseEffect that sets the list data on render
   useEffect(() => {
     fetch("http://4.237.58.241:3000/countries")
       .then((res) => res.json())
@@ -193,6 +214,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
       });
   }, []);
 
+  // useEffect that sets the row data based on the selected country
   useEffect(() => {
     if (country !== "") {
       fetch(`http://4.237.58.241:3000/volcanoes?country=${country}`)
@@ -201,11 +223,13 @@ export default function VolcanoList({ isLoggedIn, token }) {
     }
   }, [country]);
 
+  // useEffect that sets the row data based on country and population distance
   useEffect(() => {
+    const placeHolderValue = "Populated Within";
     if (
       country !== "" &&
       population !== "" &&
-      population !== "Populated Within"
+      population !== placeHolderValue
     ) {
       fetch(
         `http://4.237.58.241:3000/volcanoes?country=${country}&populatedWithin=${population}`
@@ -215,6 +239,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
     }
   }, [country, population]);
 
+  // Returning the JSX for the volcano list page
   return (
     <div>
       {isLoggedIn ? <NavBarLoggedIn /> : <NavBar />}
@@ -261,6 +286,7 @@ export default function VolcanoList({ isLoggedIn, token }) {
   );
 }
 
+// The Country Select component
 function CountrySelect({ targetCountry, dataSet, displayData }) {
   return (
     <div>
@@ -288,6 +314,7 @@ function CountrySelect({ targetCountry, dataSet, displayData }) {
   );
 }
 
+// The Population Select component
 function PopulationSelect({ findWithPopulation }) {
   return (
     <div>
@@ -307,6 +334,7 @@ function PopulationSelect({ findWithPopulation }) {
   );
 }
 
+// The Quick Search Component
 function CountrySearch({ country, selectionData }) {
   return (
     <div className="container mt-3">

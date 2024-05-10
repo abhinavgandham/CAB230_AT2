@@ -335,7 +335,19 @@ function PopulationSelect({ findWithPopulation }) {
 }
 
 // The Quick Search Component
-function CountrySearch({ country, selectionData }) {
+function CountrySearch({ selectionData }) {
+  // Setting state for the search value
+  const [value, setValue] = useState("");
+
+  // Handling change in the input field when a user types in it
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  // Function that displayes the selectiond data based on the value when search button is clicked
+  const onSearch = () => {
+    selectionData({ target: { value: value } });
+  };
   return (
     <div className="container mt-3">
       <div className="border border-danger border-2 rounded shadow p-3">
@@ -346,9 +358,12 @@ function CountrySearch({ country, selectionData }) {
           <input
             type="text"
             className="form-control"
-            value={country}
-            onChange={selectionData}
+            value={value}
+            onChange={handleChange}
           ></input>
+          <button className="btn btn-danger text-light" onClick={onSearch}>
+            Search
+          </button>
         </div>
       </div>
     </div>
